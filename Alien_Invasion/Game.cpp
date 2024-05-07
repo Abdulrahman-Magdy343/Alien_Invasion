@@ -41,7 +41,7 @@ void Game::go()
 void Game::ReadFormInputFile()
 {
 	int armyUnitsNo;
-	int ES_percent, ET_percent, EG_percent, AS_percent, AM_percent, AD_percent;
+	int ES_percent, ET_percent, EG_percent, AS_percent, AM_percent, AD_percent, EEU_percent;
 	int E_minPower, E_maxPower, E_minHealth, E_maxHealth, E_minAttCap, E_maxAttCap;
 	int A_minPower, A_maxPower, A_minHealth, A_maxHealth, A_minAttCap, A_maxAttCap;
 	int prob;
@@ -63,12 +63,65 @@ void Game::ReadFormInputFile()
 		}
 
 
-		file >> armyUnitsNo
-			>> ES_percent >> ET_percent >> EG_percent
-			>> AS_percent >> AM_percent >> AD_percent
-			>> prob
-			>> E_minPower >> E_maxPower >> E_minHealth >> E_maxHealth >> E_minAttCap >> E_maxAttCap
-			>> A_minPower >> A_maxPower >> A_minHealth >> A_maxHealth >> A_minAttCap >> A_maxAttCap;
+		string line;
+
+		getline(file, line);
+		armyUnitsNo = stoi(line);
+
+		getline(file, line);
+		stringstream ss2(line);
+		getline(ss2, line, ',');
+		ES_percent = stoi(line);
+		getline(ss2, line, ',');
+		ET_percent = stoi(line);
+		getline(ss2, line, ',');
+		EG_percent = stoi(line);
+		getline(ss2, line, ',');
+		EEU_percent = stoi(line);
+
+		getline(file, line);
+		stringstream ss3(line);
+		getline(ss3, line, ',');
+		AS_percent = stoi(line);
+		getline(ss3, line, ',');
+		AM_percent = stoi(line);
+		getline(ss3, line, ',');
+		AD_percent = stoi(line);
+
+		getline(file, line);
+		prob = stoi(line);
+
+		getline(file, line);
+		stringstream ss5(line);
+		getline(ss5, line, '-');
+		E_minPower = stoi(line);
+		getline(ss5, line, ',');
+		E_maxPower = stoi(line);
+		getline(ss5, line, '-');
+		E_minHealth = stoi(line);
+		getline(ss5, line, ',');
+		E_maxHealth = stoi(line);
+		getline(ss5, line, '-');
+		E_minAttCap = stoi(line);
+		getline(ss5, line, ',');
+		E_maxAttCap = stoi(line);
+
+		getline(file, line);
+		stringstream ss6(line);
+		getline(ss6, line, '-');
+		A_minPower = stoi(line);
+		getline(ss6, line, ',');
+		A_maxPower = stoi(line);
+		getline(ss6, line, '-');
+		A_minHealth = stoi(line);
+		getline(ss6, line, ',');
+		A_maxHealth = stoi(line);
+		getline(ss6, line, '-');
+		A_minAttCap = stoi(line);
+		getline(ss6, line, ',');
+		A_maxAttCap = stoi(line);
+		
+		
 		file.close();
 	}
 
@@ -83,12 +136,64 @@ void Game::ReadFormInputFile()
 		}
 
 
-		file >> armyUnitsNo
-			>> ES_percent >> ET_percent >> EG_percent
-			>> AS_percent >> AM_percent >> AD_percent
-			>> prob
-			>> E_minPower >> E_maxPower >> E_minHealth >> E_maxHealth >> E_minAttCap >> E_maxAttCap
-			>> A_minPower >> A_maxPower >> A_minHealth >> A_maxHealth >> A_minAttCap >> A_maxAttCap;
+		string line;
+
+		getline(file, line);
+		armyUnitsNo = stoi(line);
+
+		getline(file, line);
+		stringstream ss2(line);
+		getline(ss2, line, ',');
+		ES_percent = stoi(line);
+		getline(ss2, line, ',');
+		ET_percent = stoi(line);
+		getline(ss2, line, ',');
+		EG_percent = stoi(line);
+		getline(ss2, line, ',');
+		EEU_percent = stoi(line);
+
+		getline(file, line);
+		stringstream ss3(line);
+		getline(ss3, line, ',');
+		AS_percent = stoi(line);
+		getline(ss3, line, ',');
+		AM_percent = stoi(line);
+		getline(ss3, line, ',');
+		AD_percent = stoi(line);
+
+		getline(file, line);
+		prob = stoi(line);
+
+		getline(file, line);
+		stringstream ss5(line);
+		getline(ss5, line, '-');
+		E_minPower = stoi(line);
+		getline(ss5, line, ',');
+		E_maxPower = stoi(line);
+		getline(ss5, line, '-');
+		E_minHealth = stoi(line);
+		getline(ss5, line, ',');
+		E_maxHealth = stoi(line);
+		getline(ss5, line, '-');
+		E_minAttCap = stoi(line);
+		getline(ss5, line, ',');
+		E_maxAttCap = stoi(line);
+
+		getline(file, line);
+		stringstream ss6(line);
+		getline(ss6, line, '-');
+		A_minPower = stoi(line);
+		getline(ss6, line, ',');
+		A_maxPower = stoi(line);
+		getline(ss6, line, '-');
+		A_minHealth = stoi(line);
+		getline(ss6, line, ',');
+		A_maxHealth = stoi(line);
+		getline(ss6, line, '-');
+		A_minAttCap = stoi(line);
+		getline(ss6, line, ',');
+		A_maxAttCap = stoi(line);
+		
 		file.close();
 	}
 
@@ -101,12 +206,339 @@ void Game::ReadFormInputFile()
 			return;
 		}
 
-		file >> armyUnitsNo
-			>> ES_percent >> ET_percent >> EG_percent
-			>> AS_percent >> AM_percent >> AD_percent
-			>> prob
-			>> E_minPower >> E_maxPower >> E_minHealth >> E_maxHealth >> E_minAttCap >> E_maxAttCap
-			>> A_minPower >> A_maxPower >> A_minHealth >> A_maxHealth >> A_minAttCap >> A_maxAttCap;
+		string line;
+
+		getline(file, line);
+		armyUnitsNo = stoi(line);
+
+		getline(file, line);
+		stringstream ss2(line);
+		getline(ss2, line, ',');
+		ES_percent = stoi(line);
+		getline(ss2, line, ',');
+		ET_percent = stoi(line);
+		getline(ss2, line, ',');
+		EG_percent = stoi(line);
+		getline(ss2, line, ',');
+		EEU_percent = stoi(line);
+
+		getline(file, line);
+		stringstream ss3(line);
+		getline(ss3, line, ',');
+		AS_percent = stoi(line);
+		getline(ss3, line, ',');
+		AM_percent = stoi(line);
+		getline(ss3, line, ',');
+		AD_percent = stoi(line);
+
+		getline(file, line);
+		prob = stoi(line);
+
+		getline(file, line);
+		stringstream ss5(line);
+		getline(ss5, line, '-');
+		E_minPower = stoi(line);
+		getline(ss5, line, ',');
+		E_maxPower = stoi(line);
+		getline(ss5, line, '-');
+		E_minHealth = stoi(line);
+		getline(ss5, line, ',');
+		E_maxHealth = stoi(line);
+		getline(ss5, line, '-');
+		E_minAttCap = stoi(line);
+		getline(ss5, line, ',');
+		E_maxAttCap = stoi(line);
+
+		getline(file, line);
+		stringstream ss6(line);
+		getline(ss6, line, '-');
+		A_minPower = stoi(line);
+		getline(ss6, line, ',');
+		A_maxPower = stoi(line);
+		getline(ss6, line, '-');
+		A_minHealth = stoi(line);
+		getline(ss6, line, ',');
+		A_maxHealth = stoi(line);
+		getline(ss6, line, '-');
+		A_minAttCap = stoi(line);
+		getline(ss6, line, ',');
+		A_maxAttCap = stoi(line);
+
+		file.close();
+	}
+	if (n == 4)
+	{
+		ifstream file("InputFileHard.txt");
+		if (!file.is_open()) {
+			cout << "Input File not founded" << endl;
+			return;
+		}
+
+		string line;
+
+		getline(file, line);
+		armyUnitsNo = stoi(line);
+
+		getline(file, line);
+		stringstream ss2(line);
+		getline(ss2, line, ',');
+		ES_percent = stoi(line);
+		getline(ss2, line, ',');
+		ET_percent = stoi(line);
+		getline(ss2, line, ',');
+		EG_percent = stoi(line);
+		getline(ss2, line, ',');
+		EEU_percent = stoi(line);
+
+		getline(file, line);
+		stringstream ss3(line);
+		getline(ss3, line, ',');
+		AS_percent = stoi(line);
+		getline(ss3, line, ',');
+		AM_percent = stoi(line);
+		getline(ss3, line, ',');
+		AD_percent = stoi(line);
+
+		getline(file, line);
+		prob = stoi(line);
+
+		getline(file, line);
+		stringstream ss5(line);
+		getline(ss5, line, '-');
+		E_minPower = stoi(line);
+		getline(ss5, line, ',');
+		E_maxPower = stoi(line);
+		getline(ss5, line, '-');
+		E_minHealth = stoi(line);
+		getline(ss5, line, ',');
+		E_maxHealth = stoi(line);
+		getline(ss5, line, '-');
+		E_minAttCap = stoi(line);
+		getline(ss5, line, ',');
+		E_maxAttCap = stoi(line);
+
+		getline(file, line);
+		stringstream ss6(line);
+		getline(ss6, line, '-');
+		A_minPower = stoi(line);
+		getline(ss6, line, ',');
+		A_maxPower = stoi(line);
+		getline(ss6, line, '-');
+		A_minHealth = stoi(line);
+		getline(ss6, line, ',');
+		A_maxHealth = stoi(line);
+		getline(ss6, line, '-');
+		A_minAttCap = stoi(line);
+		getline(ss6, line, ',');
+		A_maxAttCap = stoi(line);
+
+		file.close();
+	}
+
+	if (n == 5)
+	{
+		ifstream file("InputFileHard.txt");
+		if (!file.is_open()) {
+			cout << "Input File not founded" << endl;
+			return;
+		}
+
+		string line;
+
+		getline(file, line);
+		armyUnitsNo = stoi(line);
+
+		getline(file, line);
+		stringstream ss2(line);
+		getline(ss2, line, ',');
+		ES_percent = stoi(line);
+		getline(ss2, line, ',');
+		ET_percent = stoi(line);
+		getline(ss2, line, ',');
+		EG_percent = stoi(line);
+		getline(ss2, line, ',');
+		EEU_percent = stoi(line);
+
+		getline(file, line);
+		stringstream ss3(line);
+		getline(ss3, line, ',');
+		AS_percent = stoi(line);
+		getline(ss3, line, ',');
+		AM_percent = stoi(line);
+		getline(ss3, line, ',');
+		AD_percent = stoi(line);
+
+		getline(file, line);
+		prob = stoi(line);
+
+		getline(file, line);
+		stringstream ss5(line);
+		getline(ss5, line, '-');
+		E_minPower = stoi(line);
+		getline(ss5, line, ',');
+		E_maxPower = stoi(line);
+		getline(ss5, line, '-');
+		E_minHealth = stoi(line);
+		getline(ss5, line, ',');
+		E_maxHealth = stoi(line);
+		getline(ss5, line, '-');
+		E_minAttCap = stoi(line);
+		getline(ss5, line, ',');
+		E_maxAttCap = stoi(line);
+
+		getline(file, line);
+		stringstream ss6(line);
+		getline(ss6, line, '-');
+		A_minPower = stoi(line);
+		getline(ss6, line, ',');
+		A_maxPower = stoi(line);
+		getline(ss6, line, '-');
+		A_minHealth = stoi(line);
+		getline(ss6, line, ',');
+		A_maxHealth = stoi(line);
+		getline(ss6, line, '-');
+		A_minAttCap = stoi(line);
+		getline(ss6, line, ',');
+		A_maxAttCap = stoi(line);
+
+		file.close();
+	}
+
+	if (n == 6)
+	{
+		ifstream file("InputFileHard.txt");
+		if (!file.is_open()) {
+			cout << "Input File not founded" << endl;
+			return;
+		}
+
+		string line;
+
+		getline(file, line);
+		armyUnitsNo = stoi(line);
+
+		getline(file, line);
+		stringstream ss2(line);
+		getline(ss2, line, ',');
+		ES_percent = stoi(line);
+		getline(ss2, line, ',');
+		ET_percent = stoi(line);
+		getline(ss2, line, ',');
+		EG_percent = stoi(line);
+		getline(ss2, line, ',');
+		EEU_percent = stoi(line);
+
+		getline(file, line);
+		stringstream ss3(line);
+		getline(ss3, line, ',');
+		AS_percent = stoi(line);
+		getline(ss3, line, ',');
+		AM_percent = stoi(line);
+		getline(ss3, line, ',');
+		AD_percent = stoi(line);
+
+		getline(file, line);
+		prob = stoi(line);
+
+		getline(file, line);
+		stringstream ss5(line);
+		getline(ss5, line, '-');
+		E_minPower = stoi(line);
+		getline(ss5, line, ',');
+		E_maxPower = stoi(line);
+		getline(ss5, line, '-');
+		E_minHealth = stoi(line);
+		getline(ss5, line, ',');
+		E_maxHealth = stoi(line);
+		getline(ss5, line, '-');
+		E_minAttCap = stoi(line);
+		getline(ss5, line, ',');
+		E_maxAttCap = stoi(line);
+
+		getline(file, line);
+		stringstream ss6(line);
+		getline(ss6, line, '-');
+		A_minPower = stoi(line);
+		getline(ss6, line, ',');
+		A_maxPower = stoi(line);
+		getline(ss6, line, '-');
+		A_minHealth = stoi(line);
+		getline(ss6, line, ',');
+		A_maxHealth = stoi(line);
+		getline(ss6, line, '-');
+		A_minAttCap = stoi(line);
+		getline(ss6, line, ',');
+		A_maxAttCap = stoi(line);
+
+		file.close();
+	}
+
+	if (n == 7)
+	{
+		ifstream file("InputFileHard.txt");
+		if (!file.is_open()) {
+			cout << "Input File not founded" << endl;
+			return;
+		}
+
+		string line;
+
+		getline(file, line);
+		armyUnitsNo = stoi(line);
+
+		getline(file, line);
+		stringstream ss2(line);
+		getline(ss2, line, ',');
+		ES_percent = stoi(line);
+		getline(ss2, line, ',');
+		ET_percent = stoi(line);
+		getline(ss2, line, ',');
+		EG_percent = stoi(line);
+		getline(ss2, line, ',');
+		EEU_percent = stoi(line);
+
+		getline(file, line);
+		stringstream ss3(line);
+		getline(ss3, line, ',');
+		AS_percent = stoi(line);
+		getline(ss3, line, ',');
+		AM_percent = stoi(line);
+		getline(ss3, line, ',');
+		AD_percent = stoi(line);
+
+		getline(file, line);
+		prob = stoi(line);
+
+		getline(file, line);
+		stringstream ss5(line);
+		getline(ss5, line, '-');
+		E_minPower = stoi(line);
+		getline(ss5, line, ',');
+		E_maxPower = stoi(line);
+		getline(ss5, line, '-');
+		E_minHealth = stoi(line);
+		getline(ss5, line, ',');
+		E_maxHealth = stoi(line);
+		getline(ss5, line, '-');
+		E_minAttCap = stoi(line);
+		getline(ss5, line, ',');
+		E_maxAttCap = stoi(line);
+
+		getline(file, line);
+		stringstream ss6(line);
+		getline(ss6, line, '-');
+		A_minPower = stoi(line);
+		getline(ss6, line, ',');
+		A_maxPower = stoi(line);
+		getline(ss6, line, '-');
+		A_minHealth = stoi(line);
+		getline(ss6, line, ',');
+		A_maxHealth = stoi(line);
+		getline(ss6, line, '-');
+		A_minAttCap = stoi(line);
+		getline(ss6, line, ',');
+		A_maxAttCap = stoi(line);
+
 		file.close();
 	}
 
@@ -119,6 +551,7 @@ void Game::ReadFormInputFile()
 	randGenObj.setES_percent(ES_percent);
 	randGenObj.setET_percent(ET_percent);
 	randGenObj.setEG_percent(EG_percent);
+	randGenObj.setEEU_percent(EEU_percent);
 	randGenObj.setE_minPower(E_minPower);
 	randGenObj.setE_maxPower(E_maxPower);
 	randGenObj.setE_minHealth(E_minHealth);

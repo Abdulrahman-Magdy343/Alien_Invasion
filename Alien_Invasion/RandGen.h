@@ -10,7 +10,7 @@
 class RandGen
 {
 	int armyUnitsNo;
-	int ES_percent, ET_percent, EG_percent, AS_percent, AM_percent, AD_percent;
+	int ES_percent, ET_percent, EG_percent, AS_percent, AM_percent, AD_percent, EEU_percent;
     int E_minPower, E_maxPower, E_minHealth, E_maxHealth, E_minAttCap, E_maxAttCap;
     int A_minPower, A_maxPower, A_minHealth, A_maxHealth, A_minAttCap, A_maxAttCap;
 	int prob;
@@ -41,6 +41,7 @@ public:
     void setES_percent(int percent);
     void setET_percent(int percent);
     void setEG_percent(int percent);
+    void setEEU_percent(int percent);
 
     void setAS_percent(int percent);
     void setAM_percent(int percent);
@@ -81,6 +82,7 @@ public:
     int getAS_percent() const;
     int getAM_percent() const;
     int getAD_percent() const;
+    int getEEU_percent() const;
 
     int getProb() const;
 

@@ -155,9 +155,13 @@
     <ClInclude Include="StackADT.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="InputFile.txt" />
-    <Text Include="InputFileEasy.txt" />
-    <Text Include="InputFileHard.txt" />
+    <Text Include="ModerateEarth_ModerateAliens.txt" />
+    <Text Include="StrongEarth_ModerateAliens.txt" />
+    <Text Include="StrongEarth_StrongAliens.txt" />
+    <Text Include="StrongEarth_WeakAliens.txt" />
+    <Text Include="WeakEarth_StrongAliens.txt" />
+    <Text Include="WeakEarth_WeakAliens.txt" />
+    <Text Include="WeakEarth_ModerateAliens.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -49,6 +49,11 @@ void RandGen::setEG_percent(int percent) {
     EG_percent = percent;
 }
 
+void RandGen::setEEU_percent(int percent)
+{
+    EEU_percent = percent;
+}
+
 void RandGen::setAS_percent(int percent) {
     AS_percent = percent;
 }
@@ -164,6 +169,11 @@ int RandGen::getAM_percent() const {
 
 int RandGen::getAD_percent() const {
     return AD_percent;
+}
+
+int RandGen::getEEU_percent() const
+{
+    return EEU_percent;
 }
 
 int RandGen::getProb() const {

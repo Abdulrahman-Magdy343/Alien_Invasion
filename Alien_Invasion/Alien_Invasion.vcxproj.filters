@@ -13,25 +13,22 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Input Files">
+      <UniqueIdentifier>{ad99a892-f2e4-4c45-ae13-cc00aa139eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DS Files">
+      <UniqueIdentifier>{224b6c99-a645-4c45-ba8b-7eaeaab79def}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AlienArmy Files">
+      <UniqueIdentifier>{b59e8a0f-f8d2-4f35-b2ca-aaf0f1e7b40c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EarthArmy Files">
+      <UniqueIdentifier>{0ec1dde4-20f0-4897-8b57-9e6dd7a84355}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AlienArmy.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ArmyUnit.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EarthArmyUnit.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EarthArmy.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AlienArmyUnit.cpp">
-      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Header Files</Filter>
@@ -39,60 +36,93 @@
     <ClCompile Include="RandGen.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="AlienArmyUnit.cpp">
+      <Filter>AlienArmy Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AlienArmy.cpp">
+      <Filter>AlienArmy Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EarthArmy.cpp">
+      <Filter>EarthArmy Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EarthArmyUnit.cpp">
+      <Filter>EarthArmy Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArmyUnit.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArmyUnit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EarthArmyUnit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AlienArmyUnit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LinkedQueue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QueueADT.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AlienArmy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EarthArmy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RandGen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ArrayStack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StackADT.h">
-      <Filter>Header Files</Filter>
+      <Filter>DS Files</Filter>
     </ClInclude>
-    <ClInclude Include="Deque.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DLnode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="priNode.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="QueueADT.h">
+      <Filter>DS Files</Filter>
     </ClInclude>
     <ClInclude Include="priQueue.h">
+      <Filter>DS Files</Filter>
+    </ClInclude>
+    <ClInclude Include="priNode.h">
+      <Filter>DS Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>DS Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedQueue.h">
+      <Filter>DS Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DLnode.h">
+      <Filter>DS Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Deque.h">
+      <Filter>DS Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayStack.h">
+      <Filter>DS Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AlienArmyUnit.h">
+      <Filter>AlienArmy Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AlienArmy.h">
+      <Filter>AlienArmy Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EarthArmy.h">
+      <Filter>EarthArmy Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EarthArmyUnit.h">
+      <Filter>EarthArmy Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmyUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="InputFile.txt" />
-    <Text Include="InputFileHard.txt" />
-    <Text Include="InputFileEasy.txt" />
+    <Text Include="WeakEarth_ModerateAliens.txt">
+      <Filter>Input Files</Filter>
+    </Text>
+    <Text Include="WeakEarth_WeakAliens.txt">
+      <Filter>Input Files</Filter>
+    </Text>
+    <Text Include="WeakEarth_StrongAliens.txt">
+      <Filter>Input Files</Filter>
+    </Text>
+    <Text Include="ModerateEarth_ModerateAliens.txt">
+      <Filter>Input Files</Filter>
+    </Text>
+    <Text Include="StrongEarth_StrongAliens.txt">
+      <Filter>Input Files</Filter>
+    </Text>
+    <Text Include="StrongEarth_WeakAliens.txt">
+      <Filter>Input Files</Filter>
+    </Text>
+    <Text Include="StrongEarth_ModerateAliens.txt">
+      <Filter>Input Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
