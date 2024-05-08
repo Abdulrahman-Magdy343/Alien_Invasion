@@ -15,7 +15,8 @@ RandGen::RandGen(AlienArmy& alien, EarthArmy& earth) : alienArmy(alien), earthAr
     AS_percent = 0;
     AM_percent = 0;
     AD_percent = 0;
-    prob = 0.0;
+    prob = 0;
+    Infection_prob = 0;
 }
 
 
@@ -130,6 +131,11 @@ void RandGen::setA_maxAttCap(int maxAttCap)
     A_maxAttCap = maxAttCap;
 }
 
+void RandGen::setInfection_prob(int Inf_prob)
+{
+    Infection_prob = Inf_prob;
+}
+
 
 
 Game* RandGen::getGame() const
@@ -240,86 +246,13 @@ int RandGen::getA_maxAttCap() const
     return A_maxAttCap;
 }
 
-//void RandGen::setEarthPowerLimits(int upLimit, int lowLimit) {
-//    EarthPowerUplimit = upLimit;
-//    EarthPowerLowLimit = lowLimit;
-//}
-//
-//void RandGen::setEarthHealthLimits(int upLimit, int lowLimit) {
-//    EarthHealthUplimit = upLimit;
-//    EarthHealthLowLimit = lowLimit;
-//}
-//
-//void RandGen::setEarthAttCapLimits(int upLimit, int lowLimit) {
-//    EarthAttCapUplimit = upLimit;
-//    EarthAttCapLowLimit = lowLimit;
-//}
-//
-//// Setters for Alien entity limits
-//void RandGen::setAlienPowerLimits(int upLimit, int lowLimit) {
-//    AlienPowerUplimit = upLimit;
-//    AlienPowerLowLimit = lowLimit;
-//}
-//
-//void RandGen::setAlienHealthLimits(int upLimit, int lowLimit) {
-//    AlienHealthUplimit = upLimit;
-//    AlienHealthLowLimit = lowLimit;
-//}
-//
-//void RandGen::setAlienAttCapLimits(int upLimit, int lowLimit) {
-//    AlienAttCapUplimit = upLimit;
-//    AlienAttCapLowLimit = lowLimit;
-//}
-//
-//// Getters for Earth entity limits
-//int RandGen::getEarthPowerUpLimit() const {
-//    return EarthPowerUplimit;
-//}
-//
-//int RandGen::getEarthPowerLowLimit() const {
-//    return EarthPowerLowLimit;
-//}
-//
-//int RandGen::getEarthHealthUpLimit() const {
-//    return EarthHealthUplimit;
-//}
-//
-//int RandGen::getEarthHealthLowLimit() const {
-//    return EarthHealthLowLimit;
-//}
-//
-//int RandGen::getEarthAttCapUpLimit() const {
-//    return EarthAttCapUplimit;
-//}
-//
-//int RandGen::getEarthAttCapLowLimit() const {
-//    return EarthAttCapLowLimit;
-//}
-//
-//// Getters for Alien entity limits
-//int RandGen::getAlienPowerUpLimit() const {
-//    return AlienPowerUplimit;
-//}
-//
-//int RandGen::getAlienPowerLowLimit() const {
-//    return AlienPowerLowLimit;
-//}
-//
-//int RandGen::getAlienHealthUpLimit() const {
-//    return AlienHealthUplimit;
-//}
-//
-//int RandGen::getAlienHealthLowLimit() const {
-//    return AlienHealthLowLimit;
-//}
-//
-//int RandGen::getAlienAttCapUpLimit() const {
-//    return AlienAttCapUplimit;
-//}
-//
-//int RandGen::getAlienAttCapLowLimit() const {
-//    return AlienAttCapLowLimit;
-//}
+int RandGen::getInfection_prob() const
+{
+    return Infection_prob;
+}
+
+
+
 
 void RandGen::generate()
 {

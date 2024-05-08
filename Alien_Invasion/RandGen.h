@@ -14,20 +14,13 @@ class RandGen
     int E_minPower, E_maxPower, E_minHealth, E_maxHealth, E_minAttCap, E_maxAttCap;
     int A_minPower, A_maxPower, A_minHealth, A_maxHealth, A_minAttCap, A_maxAttCap;
 	int prob;
+    int Infection_prob;
     int A, B;
     int timeStep;
     Game* pg;
     AlienArmy& alienArmy;
     EarthArmy& earthArmy;
 
-    //// Limits
-    //int EarthPowerUplimit, EarthPowerLowLimit;
-    //int EarthHealthUplimit, EarthHealthLowLimit;
-    //int EarthAttCapUplimit, EarthAttCapLowLimit;
-
-    //int AlienPowerUplimit, AlienPowerLowLimit;
-    //int AlienHealthUplimit, AlienHealthLowLimit;
-    //int AlienAttCapUplimit, AlienAttCapLowLimit;
 public:
     RandGen(AlienArmy& alien, EarthArmy& earth);
 
@@ -67,6 +60,7 @@ public:
     void setA_minAttCap(int minAttCap);
     void setA_maxAttCap(int maxAttCap);
 
+    void setInfection_prob(int Inf_prob);
 
 
     // Getters
@@ -104,32 +98,7 @@ public:
     int getA_minAttCap() const;
     int getA_maxAttCap() const;
 
-
-    //// Setters for Earth entity limits
-    //void setEarthPowerLimits(int upLimit, int lowLimit);
-    //void setEarthHealthLimits(int upLimit, int lowLimit);
-    //void setEarthAttCapLimits(int upLimit, int lowLimit);
-
-    //// Setters for Alien entity limits
-    //void setAlienPowerLimits(int upLimit, int lowLimit);
-    //void setAlienHealthLimits(int upLimit, int lowLimit);
-    //void setAlienAttCapLimits(int upLimit, int lowLimit);
-
-    //// Getters for Earth entity limits
-    //int getEarthPowerUpLimit() const;
-    //int getEarthPowerLowLimit() const;
-    //int getEarthHealthUpLimit() const;
-    //int getEarthHealthLowLimit() const;
-    //int getEarthAttCapUpLimit() const;
-    //int getEarthAttCapLowLimit() const;
-
-    //// Getters for Alien entity limits
-    //int getAlienPowerUpLimit() const;
-    //int getAlienPowerLowLimit() const;
-    //int getAlienHealthUpLimit() const;
-    //int getAlienHealthLowLimit() const;
-    //int getAlienAttCapUpLimit() const;
-    //int getAlienAttCapLowLimit() const;
+    int getInfection_prob() const;
 
     void generate();
 };

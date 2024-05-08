@@ -45,17 +45,20 @@ void Game::ReadFormInputFile()
 	int E_minPower, E_maxPower, E_minHealth, E_maxHealth, E_minAttCap, E_maxAttCap;
 	int A_minPower, A_maxPower, A_minHealth, A_maxHealth, A_minAttCap, A_maxAttCap;
 	int prob;
+	int Infection_prob;
 
 	//Choose Input file difficulty
 	int n = 1;
-	cout << "Choose difficulty level  \n1-Easy \n2-Normal \n3-Hard" << endl;
+	cout << "Choose difficulty level  \n1- ModerateEarth ModerateAliens \n2- StrongEarth WeakAliens" <<
+		"\n3- StrongEarth ModerateAliens \n4- StrongEarth StrongAliens \n5- WeakEarth WeakAliens "<<
+		"\n6- WeakEarth ModerateAliens \n7- WeakEarth StrongAliens " << endl;
 	cin >> n;
 
 	// Easy Input file
 
 	if (n == 1)
 	{
-		ifstream file("InputFileEasy.txt");
+		ifstream file("ModerateEarth_ModerateAliens.txt");
 
 		if (!file.is_open()) {
 			cout << "Input File not founded" << endl;
@@ -121,6 +124,8 @@ void Game::ReadFormInputFile()
 		getline(ss6, line, ',');
 		A_maxAttCap = stoi(line);
 		
+		getline(file, line);
+		Infection_prob = stoi(line);
 		
 		file.close();
 	}
@@ -128,7 +133,7 @@ void Game::ReadFormInputFile()
 	//normal Input File
 	if (n == 2)
 	{
-		ifstream file("InputFile.txt");
+		ifstream file("StrongEarth_WeakAliens.txt");
 
 		if (!file.is_open()) {
 			cout << "Input File not founded" << endl;
@@ -194,13 +199,16 @@ void Game::ReadFormInputFile()
 		getline(ss6, line, ',');
 		A_maxAttCap = stoi(line);
 		
+		getline(file, line);
+		Infection_prob = stoi(line);
+
 		file.close();
 	}
 
 	//Hard Input File
 	if (n == 3)
 	{
-		ifstream file("InputFileHard.txt");
+		ifstream file("StrongEarth_ModerateAliens.txt");
 		if (!file.is_open()) {
 			cout << "Input File not founded" << endl;
 			return;
@@ -263,12 +271,15 @@ void Game::ReadFormInputFile()
 		A_minAttCap = stoi(line);
 		getline(ss6, line, ',');
 		A_maxAttCap = stoi(line);
+
+		getline(file, line);
+		Infection_prob = stoi(line);
 
 		file.close();
 	}
 	if (n == 4)
 	{
-		ifstream file("InputFileHard.txt");
+		ifstream file("StrongEarth_StrongAliens.txt");
 		if (!file.is_open()) {
 			cout << "Input File not founded" << endl;
 			return;
@@ -331,13 +342,16 @@ void Game::ReadFormInputFile()
 		A_minAttCap = stoi(line);
 		getline(ss6, line, ',');
 		A_maxAttCap = stoi(line);
+
+		getline(file, line);
+		Infection_prob = stoi(line);
 
 		file.close();
 	}
 
 	if (n == 5)
 	{
-		ifstream file("InputFileHard.txt");
+		ifstream file("WeakEarth_WeakAliens.txt");
 		if (!file.is_open()) {
 			cout << "Input File not founded" << endl;
 			return;
@@ -400,13 +414,16 @@ void Game::ReadFormInputFile()
 		A_minAttCap = stoi(line);
 		getline(ss6, line, ',');
 		A_maxAttCap = stoi(line);
+
+		getline(file, line);
+		Infection_prob = stoi(line);
 
 		file.close();
 	}
 
 	if (n == 6)
 	{
-		ifstream file("InputFileHard.txt");
+		ifstream file("WeakEarth_ModerateAliens.txt");
 		if (!file.is_open()) {
 			cout << "Input File not founded" << endl;
 			return;
@@ -469,13 +486,16 @@ void Game::ReadFormInputFile()
 		A_minAttCap = stoi(line);
 		getline(ss6, line, ',');
 		A_maxAttCap = stoi(line);
+
+		getline(file, line);
+		Infection_prob = stoi(line);
 
 		file.close();
 	}
 
 	if (n == 7)
 	{
-		ifstream file("InputFileHard.txt");
+		ifstream file("WeakEarth_StrongAliens.txt");
 		if (!file.is_open()) {
 			cout << "Input File not founded" << endl;
 			return;
@@ -538,6 +558,9 @@ void Game::ReadFormInputFile()
 		A_minAttCap = stoi(line);
 		getline(ss6, line, ',');
 		A_maxAttCap = stoi(line);
+
+		getline(file, line);
+		Infection_prob = stoi(line);
 
 		file.close();
 	}
@@ -568,6 +591,8 @@ void Game::ReadFormInputFile()
 	randGenObj.setA_maxHealth(A_maxHealth);
 	randGenObj.setA_minAttCap(A_minAttCap);
 	randGenObj.setA_maxAttCap(A_maxAttCap);
+
+	randGenObj.setInfection_prob(Infection_prob);
 }
 
 void Game::Phase1()
