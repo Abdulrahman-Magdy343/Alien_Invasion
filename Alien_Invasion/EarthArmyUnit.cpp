@@ -97,13 +97,15 @@ void EarthTank::attack() {
     for (int i = 0; i < capacity; i++) {
 
         AlienMonster* m;
-        srand(time(0));
-        int randNum = rand() % (MScount + 1);
-        m = alienArmy->getAlienMonsters()[randNum];
+        //srand(time(0));
+        //int randNum = rand() % (MScount + 1);
+        //m = alienArmy->getAlienMonsters()[randNum];
+        m = alienArmy->getAlienMonsters()[MScount];
         if (m)
         {
             cout << m->getID() << ", ";
-            alienArmy->removeMonster(randNum);
+            //alienArmy->removeMonster(randNum);
+            alienArmy->removeMonster(MScount);
             int hel = m->getHealth();
             int damage = (this->health * this->power / 100.0) / pow(hel, 0.5);
             int newhel = hel - damage;
@@ -180,7 +182,12 @@ void EarthGunnery::attack() {
         AlienMonster* m;
         srand(time(0));
         int randNum = rand() % (AScount + 1);
-        m = Pgame->getAlienArmy()->getAlienMonsters()[randNum];
+        /*
+        while (!Pgame->getAlienArmy()->getAlienMonsters()[randNum]) {
+        int randNum = rand() % (AScount + 1);
+        }
+        */
+        m = Pgame->getAlienArmy()->getAlienMonsters()[Pgame->getAlienArmy()->getMonstersCount()-1];
         if (m) 
         {
             cout << m->getID() << ", ";
@@ -189,6 +196,7 @@ void EarthGunnery::attack() {
             int newhel = hel - damage;
             if (newhel < 0)
             {
+                Pgame->getAlienArmy()->removeMonster(Pgame->getAlienArmy()->getMonstersCount());
                 Pgame->addToKilled(m);
             }
             else

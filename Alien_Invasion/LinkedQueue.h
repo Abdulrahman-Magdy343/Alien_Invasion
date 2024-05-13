@@ -63,12 +63,12 @@ public :
 	bool peek(T& frntEntry)  const;	
 	int getCount() { return count; }
 	void print() const {
-		if (isEmpty()) cout << "the queue is empty" << endl;
+		if (isEmpty()) cout << "the queue is empty";
 		else
 		{
 			Node<T>* temp = frontPtr;
 			while (temp) {
-				cout << temp->getItem()->getID() << "\t";
+				cout << temp->getItem()->getID() << " ";
 				temp = temp->getNext();
 			}
 			

@@ -30,9 +30,11 @@ void AlienArmy::addUnit(AlienArmyUnit* newUnit)
 
 void AlienArmy::Attack()
 {
+    if (!AlienSoldiers.isEmpty()) {
     AlienSoldier* s;
     AlienSoldiers.peek(s);
     s->attack();
+    }
 
     if (AlienDrones.includePairOrMore())
     {
@@ -44,12 +46,11 @@ void AlienArmy::Attack()
         d1->attack();
         d1->setPower(d1->getPower() - d2->getPower());
     }
-
+    if (monstersCount) {
     AlienMonster* m;
-    srand(time(0));
-    int x = rand() % monstersCount;
-    m = AlienMonsters[x];
+    m = AlienMonsters[monstersCount-1];
     m->attack();
+    }
 }
 
 void AlienArmy::Print()
@@ -90,9 +91,10 @@ void AlienArmy::incrementMonsters()
 
 void AlienArmy::removeMonster(int index)
 {
-    delete AlienMonsters[index];
-    AlienMonsters[index] = AlienMonsters[monstersCount];
-    monstersCount--;
+    //delete AlienMonsters[index];
+    //AlienMonsters[index] = AlienMonsters[monstersCount];
+    //monstersCount--;
+    AlienMonsters[monstersCount--] = nullptr;
 }
 
 
