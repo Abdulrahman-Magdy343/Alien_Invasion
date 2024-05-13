@@ -28,23 +28,29 @@ void EarthArmy::addUnit(EarthArmyUnit* newUnit)
 
 void EarthArmy::Attack()
 {
-    EarthSoldier* s;
-    EarthSoldiers.peek(s);
-    s->attack();
-
-    EarthTank* t;
-    Tanks.peek(t);
-    t->attack();
-
-    EarthGunnery* g; int pri = 0;
-    EarthGunneries.enqueue(g, pri);
-    g->attack();
-    EarthGunneries.dequeue(g, pri);
-
-
-    HealUnit* h;
-    HealUnits.pop(h);
-    h->attack();
+    if (!EarthSoldiers.isEmpty()){
+        EarthSoldier* s;
+        EarthSoldiers.peek(s);
+        s->attack();
+    }
+    if (!Tanks.isEmpty())
+    {
+        EarthTank* t;
+        Tanks.peek(t);
+        t->attack();
+    }
+    if(!EarthGunneries.isEmpty()){
+        EarthGunnery* g; 
+        int pri = 0;
+        EarthGunneries.dequeue(g, pri);
+        g->attack();
+        EarthGunneries.enqueue(g, pri);
+    }
+    if(!HealUnits.isEmpty()){
+        HealUnit* h;
+        HealUnits.pop(h);
+        h->attack();
+    }
 }
 
 void EarthArmy::Print()
