@@ -28,6 +28,7 @@ public:
 	void Phase1();
 	void addToKilled(ArmyUnit* unit);
 	int getTimeStep();
+	bool GetSilentMode();
 	EarthArmy* getEarthArmy();
 	AlienArmy* getAlienArmy();
 	void writeArmyStatistics(ofstream& outputFile, AlienArmy& alienArmy, string armyName);

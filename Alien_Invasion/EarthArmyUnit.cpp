@@ -30,13 +30,17 @@ int EarthSoldier::getUMLjoinTime()
 }
 
 void EarthSoldier::attack() {
+    if(!Pgame->GetSilentMode())
     cout << "ES " << this->ID << " shots [";
     ArrayStack<AlienSoldier*> templist;
     for (int i = 0; i < capacity; i++) {
         AlienSoldier* u;
+
         if (Pgame->getAlienArmy()->getAlienSoldiers().dequeue(u)) {
-            if (i == capacity - 1) cout << u->getID();
-            else cout << u->getID() << ", ";
+            if (!Pgame->GetSilentMode()) {
+                if (i == capacity - 1) cout << u->getID();
+                else cout << u->getID() << ", ";
+            }
 
             if (u->isAlive() && !u->gethasbeenattacked()) {
                 u->setTa(Pgame->getTimeStep());
@@ -57,6 +61,7 @@ void EarthSoldier::attack() {
             }
         }
     }
+    if (!Pgame->GetSilentMode())
     cout << "]\n";
 
     // Add back to the Alien army's queue ONLY ONCE after all attacks
@@ -87,6 +92,7 @@ int EarthTank::getUMLjoinTime()
 }
 
 void EarthTank::attack() {
+    if (!Pgame->GetSilentMode())
     cout << "ET " << this->ID << " shots [";
     ArrayStack<AlienMonster*> templist;
     ArrayStack<AlienSoldier*> templist2;
@@ -104,6 +110,7 @@ void EarthTank::attack() {
         m = alienArmy->getAlienMonsters()[MScount];
         if (m)
         {
+            if (!Pgame->GetSilentMode())
             cout << m->getID() << ", ";
             alienArmy->removeMonster(MScount);
 
@@ -136,6 +143,7 @@ void EarthTank::attack() {
             AlienSoldier* u;
             if (alienArmy->getAlienSoldiers().dequeue(u))
             {
+                if (!Pgame->GetSilentMode())
                 cout << u->getID() << ", ";
 
                 if (u->isAlive() && !u->gethasbeenattacked()) {
@@ -162,6 +170,7 @@ void EarthTank::attack() {
         }
 
     }
+    if (!Pgame->GetSilentMode())
     cout << "]\n";
     while (!templist.isEmpty())
     {
@@ -188,6 +197,7 @@ EarthGunnery::EarthGunnery(int health, int power, int cap, int timeStamp, Game* 
 }
 
 void EarthGunnery::attack() {
+    if (!Pgame->GetSilentMode())
     cout << "EG " << this->ID << " shots [";
     ArrayStack<AlienMonster*> templist;
     int AScount = Pgame->getAlienArmy()->getMonstersCount();
@@ -201,6 +211,7 @@ void EarthGunnery::attack() {
         m = Pgame->getAlienArmy()->getAlienMonsters()[Pgame->getAlienArmy()->getMonstersCount() - 1];
         if (m)
         {
+            if (!Pgame->GetSilentMode())
             cout << m->getID() << ", ";
 
             if (m->isAlive() && !m->gethasbeenattacked()) {
@@ -229,6 +240,7 @@ void EarthGunnery::attack() {
 
         if (Pgame->getAlienArmy()->getAlienDrones().removeBack(d))
         {
+            if (!Pgame->GetSilentMode())
             cout << d->getID() << ", ";
 
             if (d->isAlive() && !d->gethasbeenattacked()) {
@@ -254,6 +266,7 @@ void EarthGunnery::attack() {
 
         if (Pgame->getAlienArmy()->getAlienDrones().removeFront(d))
         {
+            if (!Pgame->GetSilentMode())
             cout << d->getID() << ", ";
 
             if (d->isAlive() && !d->gethasbeenattacked()) {
@@ -278,7 +291,7 @@ void EarthGunnery::attack() {
         }
 
     }
-
+    if (!Pgame->GetSilentMode())
     cout << "]\n";
 
     while (!templist.isEmpty())

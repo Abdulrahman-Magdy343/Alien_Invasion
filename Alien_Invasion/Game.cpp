@@ -10,13 +10,15 @@ void Game::go()
 {
 	randGenObj.setGame(this);
 	ReadFormInputFile();
-	cout << "Enter 1 for NormalMode " <<endl<<"Enter 2 for SilentMode";
+	cout << "Enter 1 for NormalMode " << endl << "Enter 2 for SilentMode" << endl;;
 	int x=0;
-	while (x != 1 || x != 2) {
+	while (x != 1 && x != 2) {
 		cin >> x;
 		if (x == 1)SilentMode = false;
-		else if (x == 2)
+		else if (x == 2) {
 			SilentMode = true;
+			cout << "SilentMode" << endl<<"Simualation Started...."<<endl;
+		}
 		else
 		{
 			cout << "Please enter correct number" << endl;
@@ -49,6 +51,7 @@ void Game::go()
 			cout << "Press any char to continoue and E for Exit" << endl;
 			char x;
 			cin >> x;
+			cout << "\n\n\n";
 			if (x == 'e' || x == 'E')GameOn = false;
 		}
 		else {
@@ -59,12 +62,13 @@ void Game::go()
 	
 
 		
-		cout << "\n\n\n";
+		
 		// at end of each iteration
 		timeStep++;
 
 
 	}
+	cout << "Simulation Ended" << endl;
 }
 
 
@@ -698,6 +702,11 @@ void Game::addToKilled(ArmyUnit* unit)
 int Game::getTimeStep()
 {
 	return timeStep;
+}
+
+bool Game::GetSilentMode()
+{
+	return SilentMode;
 }
 
 EarthArmy* Game::getEarthArmy()
