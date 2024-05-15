@@ -23,7 +23,7 @@ AlienSoldier::AlienSoldier()
 }
 
 AlienSoldier::AlienSoldier(int health, int power, int cap, int timeStamp, Game* pg) : AlienArmyUnit(health, power, cap, timeStamp, AS, pg) {
-    setJoinTime(timeStamp);
+    
 }
 
 void AlienSoldier::attack()
@@ -46,9 +46,9 @@ void AlienSoldier::attack()
                 }
 
                 int hel = u->getHealth();
-                int damage = (this->health * this->power / 100) / pow(hel, 0.5);
+                int damage = (this->health * this->power / 100) / (double)pow(hel, 0.5);
                 int newhel = hel - damage;
-                if (newhel < 0)
+                if (newhel <= 0)
                 {
                     u->setTd(Pgame->getTimeStep());
                     Pgame->addToKilled(u);
@@ -86,7 +86,7 @@ AlienMonster::AlienMonster()
 }
 
 AlienMonster::AlienMonster(int health, int power, int cap, int timeStamp, Game* pg) : AlienArmyUnit(health, power, cap, timeStamp, AM, pg) {
-    setJoinTime(timeStamp);
+  
 }
 
 void AlienMonster::attack()
@@ -111,7 +111,7 @@ void AlienMonster::attack()
             int hel = s->getHealth();
             int damage = (this->health * this->power / 100) / pow(hel, 0.5);
             int newhel = hel - damage;
-            if (newhel < 0)
+            if (newhel <= 0)
             {
                 s->setTd(Pgame->getTimeStep());
                 Pgame->addToKilled(s);
@@ -143,7 +143,7 @@ void AlienMonster::attack()
             int hel = t->getHealth();
             int damage = (this->health * this->power / 100) / pow(hel, 0.5);
             int newhel = hel - damage;
-            if (newhel < 0)
+            if (newhel <= 0)
             {
                 t->setTd(Pgame->getTimeStep());
                 Pgame->addToKilled(t);
@@ -186,7 +186,7 @@ AlienDrone::AlienDrone()
 }
 
 AlienDrone::AlienDrone(int health, int power, int cap, int timeStamp, Game* pg) : AlienArmyUnit(health, power, cap, timeStamp, AD, pg) {
-    setJoinTime(timeStamp);
+    
      
 }
 
@@ -212,7 +212,7 @@ void AlienDrone::attack()
             int hel = g->getHealth();
             int damage = (this->health * this->power / 100) / pow(hel, 0.5);
             int newhel = hel - damage;
-            if (newhel < 0)
+            if (newhel <= 0)
             {
                 g->setTd(Pgame->getTimeStep());
                 Pgame->addToKilled(g);
@@ -238,7 +238,7 @@ void AlienDrone::attack()
             int hel = t->getHealth();
             int damage = (this->health * this->power / 100) / pow(hel, 0.5);
             int newhel = hel - damage;
-            if (newhel < 0)
+            if (newhel <= 0)
             {
                 t->setTd(Pgame->getTimeStep());
                 Pgame->addToKilled(t);

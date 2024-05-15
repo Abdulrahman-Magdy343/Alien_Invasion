@@ -120,7 +120,7 @@ inline void LinkedQueue<T>::Sort()
 }
 
 template<typename T>
-inline Node<T>* LinkedQueue<T>::Getfront()
+Node<T>* LinkedQueue<T>::Getfront()
 {
 	return frontPtr;
 }

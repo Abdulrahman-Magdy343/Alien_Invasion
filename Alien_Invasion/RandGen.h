@@ -16,7 +16,7 @@ class RandGen
 	int prob;
     int Infection_prob;
     int A, B;
-    int timeStep;
+   
     Game* pg;
     AlienArmy& alienArmy;
     EarthArmy& earthArmy;
@@ -100,6 +100,6 @@ public:
 
     int getInfection_prob() const;
 
-    void generate();
+    void generate(int timeStep);
 };
 

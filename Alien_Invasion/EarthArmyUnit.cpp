@@ -16,7 +16,7 @@ EarthSoldier::EarthSoldier() {}
 
 EarthSoldier::EarthSoldier(int health, int power, int cap, int timeStamp, Game* pg) :
     EarthArmyUnit(health, power, cap, timeStamp, ES, pg) {  
-    setJoinTime(timeStamp);
+   
 }
 
 void EarthSoldier::setUMLjoinTime(int Tj)
@@ -34,12 +34,11 @@ void EarthSoldier::attack() {
     ArrayStack<AlienSoldier*> templist;
     for (int i = 0; i < capacity; i++) {
         AlienSoldier* u;
-        if (Pgame->getAlienArmy()->getAlienSoldiers().dequeue(u))
-        {
+        if (Pgame->getAlienArmy()->getAlienSoldiers().dequeue(u)) {
             if (i == capacity - 1) cout << u->getID();
             else cout << u->getID() << ", ";
 
-            if (u->isAlive()&&!u->gethasbeenattacked()) {  // Check if already attacked
+            if (u->isAlive() && !u->gethasbeenattacked()) {
                 u->setTa(Pgame->getTimeStep());
                 u->setHasBeenAttacked(true);
             }
@@ -47,25 +46,24 @@ void EarthSoldier::attack() {
             int hel = u->getHealth();
             int damage = (this->health * this->power / 100) / pow(hel, 0.5);
             int newhel = hel - damage;
-            if (newhel < 0)
-            {
-                u->setTd(Pgame->getTimeStep()); // Set Td on destruction
+            if (newhel <= 0) { // Add killed unit only when health is zero or below
+                u->setTd(Pgame->getTimeStep());
                 Pgame->addToKilled(u);
                 u->setHealth(0);
             }
-            else
-            {
+            else {
                 u->setHealth(newhel);
-                templist.push(u);
+                templist.push(u); // Add back to templist if still alive
             }
         }
     }
     cout << "]\n";
-    while (!templist.isEmpty())
-    {
+
+    // Add back to the Alien army's queue ONLY ONCE after all attacks
+    while (!templist.isEmpty()) {
         AlienSoldier* u;
         templist.pop(u);
-        Pgame->getAlienArmy()->addUnit(u);
+        Pgame->getAlienArmy()->getAlienSoldiers().enqueue(u);
     }
 }
 
@@ -75,7 +73,7 @@ EarthTank::EarthTank() {}
 
 EarthTank::EarthTank(int health, int power, int cap, int timeStamp, Game* pg) :
     EarthArmyUnit(health, power, cap, timeStamp, ET, pg) {
-    setJoinTime(timeStamp);
+   
 }
 
 void EarthTank::setUMLjoinTime(int Tj)
@@ -117,7 +115,7 @@ void EarthTank::attack() {
             int hel = m->getHealth();
             int damage = (this->health * this->power / 100.0) / pow(hel, 0.5);
             int newhel = hel - damage;
-            if (newhel < 0)
+            if (newhel <= 0)
             {
                 m->setTd(Pgame->getTimeStep());
                 Pgame->addToKilled(m);
@@ -148,7 +146,7 @@ void EarthTank::attack() {
                 int hel = u->getHealth();
                 int damage = (this->health * this->power / 100.0) / pow(hel, 0.5);
                 int newhel = hel - damage;
-                if (newhel < 0)
+                if (newhel <=0)
                 {
                     u->setTd(Pgame->getTimeStep());
                     Pgame->addToKilled(u);
@@ -186,7 +184,7 @@ EarthGunnery::EarthGunnery() {}
 
 EarthGunnery::EarthGunnery(int health, int power, int cap, int timeStamp, Game* pg) :
     EarthArmyUnit(health, power, cap, timeStamp, EG, pg) { 
-    setJoinTime(timeStamp);
+   
 }
 
 void EarthGunnery::attack() {
@@ -213,7 +211,7 @@ void EarthGunnery::attack() {
             int hel = m->getHealth();
             int damage = (this->health * this->power / 100) / pow(hel, 0.5);
             int newhel = hel - damage;
-            if (newhel < 0)
+            if (newhel <= 0)
             {
                 m->setTd(Pgame->getTimeStep());
                 Pgame->getAlienArmy()->removeMonster(Pgame->getAlienArmy()->getMonstersCount());
@@ -241,7 +239,7 @@ void EarthGunnery::attack() {
             int hel = d->getHealth();
             int newhel = hel - this->power;
 
-            if (newhel < 0)
+            if (newhel <= 0)
             {
                 d->setTd(Pgame->getTimeStep());
                 Pgame->addToKilled(d);
@@ -266,7 +264,7 @@ void EarthGunnery::attack() {
             int hel = d->getHealth();
             int newhel = hel - this->power;
 
-            if (newhel < 0)
+            if (newhel <= 0)
             {
                 d->setTd(Pgame->getTimeStep());
                 Pgame->addToKilled(d);
@@ -305,7 +303,7 @@ HealUnit::HealUnit()
 
 HealUnit::HealUnit(int health, int power, int cap, int timeStamp, Game* pg):EarthArmyUnit(health, power, cap, timeStamp, HU, pg)
 {
-    setJoinTime(timeStamp);
+    
 }
 
 void HealUnit::attack()

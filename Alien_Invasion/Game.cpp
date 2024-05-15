@@ -8,9 +8,11 @@ void Game::go()
 {
 	randGenObj.setGame(this);
 	ReadFormInputFile();
-	while(timeStep<=50)
+	timeStep = 0;
+	while(timeStep<=100)
 	{
-		randGenObj.generate();
+		
+		randGenObj.generate(timeStep);
 
 		earthArmy.Attack();
 		alienArmy.Attack();
@@ -26,8 +28,8 @@ void Game::go()
 		killedList.print();
 		cout << "]\n";
 
-		char x;
-		cin >> x;
+		/*char x;
+		cin >> x;*/
 		cout << "\n\n\n";
 		// at end of each iteration
 		timeStep++;
@@ -659,11 +661,9 @@ void Game::Phase1()
 
 void Game::addToKilled(ArmyUnit* unit)
 {
-	if (unit->isAlive()) { 
-		unit->setHealth(0); 
-		unit->setTd(timeStep); 
-		killedList.enqueue(unit);
-	}
+	unit->setHealth(0);
+	unit->setTd(timeStep);
+	killedList.enqueue(unit);
 }
 
 int Game::getTimeStep()
@@ -680,6 +680,8 @@ AlienArmy* Game::getAlienArmy()
 {
 	return &alienArmy;
 }
+
+
 void Game::writeArmyStatistics(ofstream& outputFile, EarthArmy& earthArmy, string armyName) {
 	outputFile << "\n\nBattle Statistics for " << armyName << " Army:\n";
 
@@ -696,6 +698,8 @@ void Game::writeArmyStatistics(ofstream& outputFile, EarthArmy& earthArmy, strin
 	totalUnits = ES_total + ET_total + EG_total;
 
 	// Count destroyed units in killedList
+	ArmyUnit* ptr;
+	killedList.peek(ptr);
 	Node<ArmyUnit*>* current = killedList.Getfront();
 	while (current != nullptr) {
 		ArmyUnit* unit = current->getItem();
