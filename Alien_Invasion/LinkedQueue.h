@@ -55,6 +55,7 @@ private :
 	int count;
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
+	
 public :
 	LinkedQueue();	
 	bool isEmpty() const ;
@@ -62,6 +63,8 @@ public :
 	bool dequeue(T& frntEntry);  
 	bool peek(T& frntEntry)  const;	
 	int getCount() { return count; }
+	void Sort();
+	Node<T>* Getfront();
 	void print() const {
 		if (isEmpty()) cout << "the queue is empty";
 		else
@@ -87,6 +90,40 @@ Function: Queue()
 The constructor of the Queue class.
 
 */
+
+template<typename T>
+inline void LinkedQueue<T>::Sort()
+{
+
+	if (isEmpty()) return; // Nothing to sort
+
+	Node<T>* current = frontPtr;
+	Node<T>* index = nullptr;
+
+	T temp;
+
+	while (current != nullptr) {
+		index = current->getNext();
+
+		while (index != nullptr) {
+			if (current->getItem()->getTd() > index->getItem()->getTd()) {
+				temp = current->getItem();
+				current->setItem(index->getItem());
+				index->setItem(temp);
+			}
+			index = index->getNext();
+		}
+		current = current->getNext();
+	}
+	
+	
+}
+
+template<typename T>
+inline Node<T>* LinkedQueue<T>::Getfront()
+{
+	return frontPtr;
+}
 
 template <typename T>
 LinkedQueue<T>::LinkedQueue()

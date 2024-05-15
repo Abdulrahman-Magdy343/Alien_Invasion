@@ -28,6 +28,9 @@ public:
 	int getTimeStep();
 	EarthArmy* getEarthArmy();
 	AlienArmy* getAlienArmy();
+	void writeArmyStatistics(ofstream& outputFile, AlienArmy& alienArmy, string armyName);
+	void writeArmyStatistics(ofstream& outputFile, EarthArmy& earthArmy, string armyName);
+	void generateOutputFile(string filename);
 
 };
 

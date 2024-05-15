@@ -102,6 +102,11 @@ Game* ArmyUnit::getPgame() const {
     return Pgame;
 }
 
+bool ArmyUnit::gethasbeenattacked()
+{
+    return hasBeenAttacked;
+}
+
 int ArmyUnit::getTa() const {
     return Ta;
 }
@@ -121,3 +126,10 @@ int ArmyUnit::getDd() const {
 int ArmyUnit::getDb() const {
     return Db;
 }
+
+void ArmyUnit::setHasBeenAttacked(bool attacked)
+{
+    hasBeenAttacked = attacked;
+}
+
+

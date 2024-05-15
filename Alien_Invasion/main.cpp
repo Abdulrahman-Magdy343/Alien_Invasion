@@ -7,6 +7,7 @@ int main()
 {
 	Game* game = new Game();
 	game->go();
+	game->generateOutputFile("battle_output.txt");
 
 
 }

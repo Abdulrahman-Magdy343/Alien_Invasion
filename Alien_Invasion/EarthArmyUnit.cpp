@@ -16,6 +16,7 @@ EarthSoldier::EarthSoldier() {}
 
 EarthSoldier::EarthSoldier(int health, int power, int cap, int timeStamp, Game* pg) :
     EarthArmyUnit(health, power, cap, timeStamp, ES, pg) {  
+    setJoinTime(timeStamp);
 }
 
 void EarthSoldier::setUMLjoinTime(int Tj)
@@ -35,18 +36,22 @@ void EarthSoldier::attack() {
         AlienSoldier* u;
         if (Pgame->getAlienArmy()->getAlienSoldiers().dequeue(u))
         {
-            /* Just To print in console */
             if (i == capacity - 1) cout << u->getID();
             else cout << u->getID() << ", ";
 
-            u->setTa(Pgame->getTimeStep());
+            if (u->isAlive()&&!u->gethasbeenattacked()) {  // Check if already attacked
+                u->setTa(Pgame->getTimeStep());
+                u->setHasBeenAttacked(true);
+            }
+
             int hel = u->getHealth();
             int damage = (this->health * this->power / 100) / pow(hel, 0.5);
             int newhel = hel - damage;
             if (newhel < 0)
             {
-                u->setTd(Pgame->getTimeStep());
+                u->setTd(Pgame->getTimeStep()); // Set Td on destruction
                 Pgame->addToKilled(u);
+                u->setHealth(0);
             }
             else
             {
@@ -70,6 +75,7 @@ EarthTank::EarthTank() {}
 
 EarthTank::EarthTank(int health, int power, int cap, int timeStamp, Game* pg) :
     EarthArmyUnit(health, power, cap, timeStamp, ET, pg) {
+    setJoinTime(timeStamp);
 }
 
 void EarthTank::setUMLjoinTime(int Tj)
@@ -97,22 +103,25 @@ void EarthTank::attack() {
     for (int i = 0; i < capacity; i++) {
 
         AlienMonster* m;
-        //srand(time(0));
-        //int randNum = rand() % (MScount + 1);
-        //m = alienArmy->getAlienMonsters()[randNum];
         m = alienArmy->getAlienMonsters()[MScount];
         if (m)
         {
             cout << m->getID() << ", ";
-            //alienArmy->removeMonster(randNum);
             alienArmy->removeMonster(MScount);
+
+            if (m->isAlive() && !m->gethasbeenattacked()) {
+                m->setTa(Pgame->getTimeStep());
+                m->setHasBeenAttacked(true);
+            }
+
             int hel = m->getHealth();
             int damage = (this->health * this->power / 100.0) / pow(hel, 0.5);
             int newhel = hel - damage;
             if (newhel < 0)
             {
-
+                m->setTd(Pgame->getTimeStep());
                 Pgame->addToKilled(m);
+                m->setHealth(0);
             }
             else
             {
@@ -120,8 +129,8 @@ void EarthTank::attack() {
                 templist.push(m);
             }
         }
-        
-        
+
+
         if ((double)ESCount / ASCount > 0.8) attackSoldiersFlag = false;
 
         if (attackSoldiersFlag)
@@ -130,12 +139,20 @@ void EarthTank::attack() {
             if (alienArmy->getAlienSoldiers().dequeue(u))
             {
                 cout << u->getID() << ", ";
+
+                if (u->isAlive() && !u->gethasbeenattacked()) {
+                    u->setTa(Pgame->getTimeStep());
+                    u->setHasBeenAttacked(true);
+                }
+
                 int hel = u->getHealth();
                 int damage = (this->health * this->power / 100.0) / pow(hel, 0.5);
                 int newhel = hel - damage;
                 if (newhel < 0)
                 {
+                    u->setTd(Pgame->getTimeStep());
                     Pgame->addToKilled(u);
+                    u->setHealth(0);
                 }
                 else
                 {
@@ -143,21 +160,21 @@ void EarthTank::attack() {
                     templist2.push(u);
                 }
             }
-        
+
         }
-        
+
     }
     cout << "]\n";
     while (!templist.isEmpty())
     {
-        AlienMonster* m; // creation in or out?
+        AlienMonster* m;
         templist.pop(m);
         Pgame->getAlienArmy()->addUnit(m);
     }
 
     while (!templist2.isEmpty())
     {
-        AlienSoldier* u; // creation in or out?
+        AlienSoldier* u;
         templist2.pop(u);
         Pgame->getAlienArmy()->getAlienSoldiers().enqueue(u);
     }
@@ -168,7 +185,8 @@ void EarthTank::attack() {
 EarthGunnery::EarthGunnery() {}
 
 EarthGunnery::EarthGunnery(int health, int power, int cap, int timeStamp, Game* pg) :
-    EarthArmyUnit(health, power, cap, timeStamp, EG, pg) {  
+    EarthArmyUnit(health, power, cap, timeStamp, EG, pg) { 
+    setJoinTime(timeStamp);
 }
 
 void EarthGunnery::attack() {
@@ -182,22 +200,25 @@ void EarthGunnery::attack() {
         AlienMonster* m;
         srand(time(0));
         int randNum = rand() % (AScount + 1);
-        /*
-        while (!Pgame->getAlienArmy()->getAlienMonsters()[randNum]) {
-        int randNum = rand() % (AScount + 1);
-        }
-        */
-        m = Pgame->getAlienArmy()->getAlienMonsters()[Pgame->getAlienArmy()->getMonstersCount()-1];
-        if (m) 
+        m = Pgame->getAlienArmy()->getAlienMonsters()[Pgame->getAlienArmy()->getMonstersCount() - 1];
+        if (m)
         {
             cout << m->getID() << ", ";
+
+            if (m->isAlive() && !m->gethasbeenattacked()) {
+                m->setTa(Pgame->getTimeStep());
+                m->setHasBeenAttacked(true);
+            }
+
             int hel = m->getHealth();
             int damage = (this->health * this->power / 100) / pow(hel, 0.5);
             int newhel = hel - damage;
             if (newhel < 0)
             {
+                m->setTd(Pgame->getTimeStep());
                 Pgame->getAlienArmy()->removeMonster(Pgame->getAlienArmy()->getMonstersCount());
                 Pgame->addToKilled(m);
+                m->setHealth(0);
             }
             else
             {
@@ -206,50 +227,65 @@ void EarthGunnery::attack() {
             }
         }
 
-        AlienDrone* d1;
-        AlienDrone* d2;
+        AlienDrone* d;
 
-        if (Pgame->getAlienArmy()->getAlienDrones().removeBack(d1))
+        if (Pgame->getAlienArmy()->getAlienDrones().removeBack(d))
         {
-            cout << d1->getID() << ", ";
-            int hel = d1->getHealth();
+            cout << d->getID() << ", ";
+
+            if (d->isAlive() && !d->gethasbeenattacked()) {
+                d->setTa(Pgame->getTimeStep());
+                d->setHasBeenAttacked(true);
+            }
+
+            int hel = d->getHealth();
             int newhel = hel - this->power;
 
             if (newhel < 0)
             {
-                Pgame->addToKilled(d1);
+                d->setTd(Pgame->getTimeStep());
+                Pgame->addToKilled(d);
+                d->setHealth(0);
             }
             else
             {
-                m->setHealth(newhel);
-                templist2.push(d1);
+                d->setHealth(newhel);
+                templist2.push(d);
             }
         }
-        if (Pgame->getAlienArmy()->getAlienDrones().removeFront(d2))
+
+        if (Pgame->getAlienArmy()->getAlienDrones().removeFront(d))
         {
-            cout << d2->getID() << ", ";
-            int hel = d2->getHealth();
+            cout << d->getID() << ", ";
+
+            if (d->isAlive() && !d->gethasbeenattacked()) {
+                d->setTa(Pgame->getTimeStep());
+                d->setHasBeenAttacked(true);
+            }
+
+            int hel = d->getHealth();
             int newhel = hel - this->power;
 
             if (newhel < 0)
             {
-                Pgame->addToKilled(d1);
+                d->setTd(Pgame->getTimeStep());
+                Pgame->addToKilled(d);
+                d->setHealth(0);
             }
             else
             {
-                m->setHealth(newhel);
-                templist2.push(d2);
+                d->setHealth(newhel);
+                templist2.push(d);
             }
         }
 
-        
     }
 
     cout << "]\n";
 
     while (!templist.isEmpty())
     {
-        AlienMonster* m; // creation in or out?
+        AlienMonster* m;
         templist.pop(m);
         Pgame->getAlienArmy()->addUnit(m);
     }
@@ -262,12 +298,14 @@ void EarthGunnery::attack() {
 
 }
 
+
 HealUnit::HealUnit()
 {
 }
 
 HealUnit::HealUnit(int health, int power, int cap, int timeStamp, Game* pg):EarthArmyUnit(health, power, cap, timeStamp, HU, pg)
 {
+    setJoinTime(timeStamp);
 }
 
 void HealUnit::attack()

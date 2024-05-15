@@ -61,12 +61,17 @@ public:
 	int getPower() const;
 	int getCapacity() const;
 	Game* getPgame() const;
+	bool gethasbeenattacked();
+	bool isAlive() const { 
+		return health > 0;
+	}
 
 	int getTa() const;
 	int getTd() const;
 	int getDf() const;
 	int getDd() const;
 	int getDb() const;
+	void setHasBeenAttacked(bool attacked);
 
 
 
