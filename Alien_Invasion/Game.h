@@ -18,6 +18,8 @@ class Game
 	EarthArmy earthArmy;
 	LinkedQueue<ArmyUnit*> killedList;
 	RandGen randGenObj;
+	bool GameOn;
+	bool SilentMode;
 
 public:
 	Game();

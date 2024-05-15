@@ -2,14 +2,33 @@
 
 Game::Game(): randGenObj(alienArmy, earthArmy)
 {
+	GameOn = true;
+	SilentMode = false;
 }
 
 void Game::go()
 {
 	randGenObj.setGame(this);
 	ReadFormInputFile();
+	cout << "Enter 1 for NormalMode " <<endl<<"Enter 2 for SilentMode";
+	int x=0;
+	while (x != 1 || x != 2) {
+		cin >> x;
+		if (x == 1)SilentMode = false;
+		else if (x == 2)
+			SilentMode = true;
+		else
+		{
+			cout << "Please enter correct number" << endl;
+		}
+
+
+	}
+	
+	
 	timeStep = 0;
-	while(timeStep<=100)
+
+	while(GameOn)
 	{
 		
 		randGenObj.generate(timeStep);
@@ -19,17 +38,27 @@ void Game::go()
 
 
 		//Printing Part
+		if (!SilentMode) {
+			cout << "Current timestep: " << timeStep << endl;
+			earthArmy.Print();
+			alienArmy.Print();
+			cout << "================= Killed list ================" << endl;
+			cout << killedList.getCount() << " units [";
+			killedList.print();
+			cout << "]\n";
+			cout << "Press any char to continoue and E for Exit" << endl;
+			char x;
+			cin >> x;
+			if (x == 'e' || x == 'E')GameOn = false;
+		}
+		else {
+			if (timeStep == 100) {
+				GameOn = false;
+			}
+		}
+	
 
-		cout << "Current timestep: " << timeStep << endl;
-		earthArmy.Print();
-		alienArmy.Print();
-		cout << "================= Killed list ================" << endl;
-		cout << killedList.getCount() << " units [";
-		killedList.print();
-		cout << "]\n";
-
-		/*char x;
-		cin >> x;*/
+		
 		cout << "\n\n\n";
 		// at end of each iteration
 		timeStep++;
