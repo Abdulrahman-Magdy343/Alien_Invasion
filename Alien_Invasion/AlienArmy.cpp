@@ -33,6 +33,7 @@ void AlienArmy::Attack()
     if (!AlienSoldiers.isEmpty()) {
     AlienSoldier* s;
     AlienSoldiers.peek(s);
+    if(s)
     s->attack();
     }
 
