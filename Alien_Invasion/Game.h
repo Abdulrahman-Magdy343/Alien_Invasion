@@ -34,6 +34,7 @@ public:
 	void writeArmyStatistics(ofstream& outputFile, AlienArmy& alienArmy, string armyName);
 	void writeArmyStatistics(ofstream& outputFile, EarthArmy& earthArmy, string armyName);
 	void generateOutputFile(string filename);
+	int getInfectionProb();
 
 };
 

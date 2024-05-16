@@ -37,7 +37,7 @@ void Game::go()
 
 		earthArmy.Attack();
 		alienArmy.Attack();
-
+		earthArmy.infectionSpread();
 
 		//Printing Part
 		if (!SilentMode) {
@@ -48,6 +48,7 @@ void Game::go()
 			cout << killedList.getCount() << " units [";
 			killedList.print();
 			cout << "]\n";
+			cout << "Infection Percentage : " << this->getEarthArmy()->getNumOfInfectedSoldiers() << endl;
 			cout << "Press any char to continoue and E for Exit" << endl;
 			char x;
 			cin >> x;
@@ -869,4 +870,9 @@ void Game::generateOutputFile(string filename) {
 
 	outputFile.close();
 	cout << "Output file '" << filename << "' generated successfully." << endl;
+}
+
+int Game::getInfectionProb()
+{
+	return randGenObj.getInfection_prob();
 }

@@ -21,13 +21,17 @@ public:
 
 class EarthSoldier : public EarthArmyUnit {
 	int UMLjoinTime;
+	bool isInfected;
 public:
 	// Constructors
 	EarthSoldier();
 	EarthSoldier(int health, int power, int cap, int timeStamp, Game* pg = nullptr); // Optional Game pointer
 	void setUMLjoinTime(int Tj);
 	int getUMLjoinTime();
+	void beInfected();
 	void attack() override; // Override pure virtual function
+	string getID();
+	bool getIsInfected();
 };
 
 class EarthTank : public EarthArmyUnit {

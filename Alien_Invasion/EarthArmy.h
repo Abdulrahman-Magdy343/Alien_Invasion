@@ -13,7 +13,7 @@ class EarthArmy
     ArrayStack<HealUnit*> HealUnits;
     priQueue<EarthSoldier*> SoldiersUML;
     LinkedQueue<EarthTank*> TanksUML;
-
+    int noOfInfectedSoldiers;
 
 public:
     bool AllAreEmpty();
@@ -21,7 +21,9 @@ public:
     void Attack();
     void Print();
     void addToUML(EarthArmyUnit* newUnit);
-
+    void infectionSpread();
+    void addInfectedSoldier();
+    void decrementInfectedSoldier();
     // Setters
     void setTanks(ArrayStack<EarthTank*> tanks) { Tanks = tanks; }
     void setEarthSoldiers(LinkedQueue<EarthSoldier*> earthSoldiers) { EarthSoldiers = earthSoldiers; }
@@ -34,5 +36,6 @@ public:
     ArrayStack<HealUnit*>& getHealUnits();
     priQueue<EarthSoldier*>& getSoldiersUML();
     LinkedQueue<EarthTank*>& getTanksUML();
+    int getNumOfInfectedSoldiers();
 };
 

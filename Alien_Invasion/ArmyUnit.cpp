@@ -1,5 +1,7 @@
 #include "ArmyUnit.h"
 #include "Game.h"
+#include <string>
+
 
 
 
@@ -67,9 +69,10 @@ void ArmyUnit::setDb(int db) {
 
 // Getters
 
-int ArmyUnit::getID() const {
-    return ID;
+string ArmyUnit::getID() const  {
+    return to_string(ID);
 }
+
 
 UnitType ArmyUnit::getType() const {
     return type;

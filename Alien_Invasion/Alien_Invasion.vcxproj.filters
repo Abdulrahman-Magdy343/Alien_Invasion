@@ -25,6 +25,9 @@
     <Filter Include="EarthArmy Files">
       <UniqueIdentifier>{0ec1dde4-20f0-4897-8b57-9e6dd7a84355}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SUArmy Files">
+      <UniqueIdentifier>{a015d7d1-b196-4822-a40d-fa7e7c205e97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,12 +54,15 @@
     <ClCompile Include="ArmyUnit.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="SUArmy.cpp">
+      <Filter>SUArmy Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SUArmyunit.cpp">
+      <Filter>SUArmy Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RandGen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StackADT.h">
@@ -100,6 +106,15 @@
     </ClInclude>
     <ClInclude Include="ArmyUnit.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SUArmy.h">
+      <Filter>SUArmy Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandGen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SUArmyunit.h">
+      <Filter>SUArmy Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

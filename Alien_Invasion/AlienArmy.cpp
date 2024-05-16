@@ -46,10 +46,12 @@ void AlienArmy::Attack()
         d1->attack();
         d1->setPower(d1->getPower() - d2->getPower());
     }
-    if (monstersCount) {
-    AlienMonster* m;
-    m = AlienMonsters[monstersCount-1];
-    m->attack();
+    if (monstersCount>0) {
+
+        AlienMonster* m;
+        m = AlienMonsters[monstersCount-1];
+        m->attack();
+    
     }
 }
 

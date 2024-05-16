@@ -135,6 +135,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RandGen.cpp" />
+    <ClCompile Include="SUArmy.cpp" />
+    <ClCompile Include="SUArmyunit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlienArmy.h" />
@@ -153,6 +155,8 @@
     <ClInclude Include="QueueADT.h" />
     <ClInclude Include="RandGen.h" />
     <ClInclude Include="StackADT.h" />
+    <ClInclude Include="SUArmy.h" />
+    <ClInclude Include="SUArmyunit.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ModerateEarth_ModerateAliens.txt" />

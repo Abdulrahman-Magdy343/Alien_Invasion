@@ -1,4 +1,6 @@
 #pragma once
+
+#include <string>
 using namespace std;
 
 class Game;
@@ -53,7 +55,7 @@ public:
 	void setDb(int db);
 
 	// Getters
-	int getID() const;
+	string getID() const;
 	UnitType getType() const;
 	int getJoinTime() const;
 	int getHealth() const;

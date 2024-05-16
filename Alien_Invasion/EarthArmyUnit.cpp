@@ -12,7 +12,7 @@ EarthArmyUnit::EarthArmyUnit(int health, int power, int cap, int timeStamp, Unit
 
 // EarthSoldier
 
-EarthSoldier::EarthSoldier() {}
+EarthSoldier::EarthSoldier() { isInfected = 0; }
 
 EarthSoldier::EarthSoldier(int health, int power, int cap, int timeStamp, Game* pg) :
     EarthArmyUnit(health, power, cap, timeStamp, ES, pg) {  
@@ -29,9 +29,15 @@ int EarthSoldier::getUMLjoinTime()
     return UMLjoinTime;
 }
 
+void EarthSoldier::beInfected()
+{
+    isInfected = 1;
+    Pgame->getEarthArmy()->addInfectedSoldier();
+}
+
 void EarthSoldier::attack() {
     if(!Pgame->GetSilentMode())
-    cout << "ES " << this->ID << " shots [";
+    cout << "ES " << this->getID() << " shots [";
     ArrayStack<AlienSoldier*> templist;
     for (int i = 0; i < capacity; i++) {
         AlienSoldier* u;
@@ -70,6 +76,16 @@ void EarthSoldier::attack() {
         templist.pop(u);
         Pgame->getAlienArmy()->getAlienSoldiers().enqueue(u);
     }
+}
+
+string EarthSoldier::getID()
+{
+    return (isInfected)?(to_string(this->ID) + ":(") : (to_string(this->ID));
+}
+
+bool EarthSoldier::getIsInfected()
+{
+    return isInfected;
 }
 
 // EarthTank
