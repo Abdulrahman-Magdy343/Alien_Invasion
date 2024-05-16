@@ -83,7 +83,7 @@ void EarthSoldier::attack() {
 		for (int i = 0; i < capacity; i++) {
 
 			if (Pgame->getEarthArmy()->getEarthSoldiers().dequeue(u)) {
-				if (u == this) { cout << "nooooooooooooooooooooooooooooooooo before " << i << " after", i--, cout << i<<" "; continue; }
+				if (u == this) { i--; continue; }
 				if (!Pgame->GetSilentMode()) {
 					if (i == capacity - 1) cout << u->getID();
 					else cout << u->getID() << ", ";
