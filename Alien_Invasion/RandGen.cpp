@@ -17,6 +17,7 @@ RandGen::RandGen(AlienArmy& alien, EarthArmy& earth) : alienArmy(alien), earthAr
     AD_percent = 0;
     prob = 0;
     Infection_prob = 0;
+    threshold = 0;
 }
 
 
@@ -132,7 +133,9 @@ void RandGen::setInfection_prob(int Inf_prob)
     Infection_prob = Inf_prob;
 }
 
-
+void RandGen::setThreshold(int Threshold) {
+    threshold = Threshold;
+}
 
 Game* RandGen::getGame() const
 {
@@ -245,7 +248,10 @@ int RandGen::getInfection_prob() const
     return Infection_prob;
 }
 
-
+int RandGen::getThreshold() const
+{
+    return threshold;
+}
 
 
 void RandGen::generate(int timeStep)

@@ -15,6 +15,7 @@ class RandGen
     int A_minPower, A_maxPower, A_minHealth, A_maxHealth, A_minAttCap, A_maxAttCap;
 	int prob;
     int Infection_prob;
+    int threshold;
     int A, B;
    
     Game* pg;
@@ -61,6 +62,7 @@ public:
     void setA_maxAttCap(int maxAttCap);
 
     void setInfection_prob(int Inf_prob);
+    void setThreshold(int Threshold);
 
 
     // Getters
@@ -99,6 +101,7 @@ public:
     int getA_maxAttCap() const;
 
     int getInfection_prob() const;
+    int getThreshold() const;
 
     void generate(int timeStep);
 };

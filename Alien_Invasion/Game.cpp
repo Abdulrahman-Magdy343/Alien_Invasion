@@ -82,6 +82,7 @@ void Game::ReadFormInputFile()
 	int A_minPower, A_maxPower, A_minHealth, A_maxHealth, A_minAttCap, A_maxAttCap;
 	int prob;
 	int Infection_prob;
+	int threshold;
 
 	//Choose Input file difficulty
 	int n = 0;
@@ -169,6 +170,8 @@ void Game::ReadFormInputFile()
 		
 		getline(file, line);
 		Infection_prob = stoi(line);
+		getline(file, line);
+		threshold = stoi(line);
 		
 		file.close();
 	}
@@ -244,6 +247,8 @@ void Game::ReadFormInputFile()
 		
 		getline(file, line);
 		Infection_prob = stoi(line);
+		getline(file, line);
+		threshold = stoi(line);
 
 		file.close();
 	}
@@ -317,6 +322,8 @@ void Game::ReadFormInputFile()
 
 		getline(file, line);
 		Infection_prob = stoi(line);
+		getline(file, line);
+		threshold = stoi(line);
 
 		file.close();
 	}
@@ -388,6 +395,8 @@ void Game::ReadFormInputFile()
 
 		getline(file, line);
 		Infection_prob = stoi(line);
+		getline(file, line);
+		threshold = stoi(line);
 
 		file.close();
 	}
@@ -460,6 +469,8 @@ void Game::ReadFormInputFile()
 
 		getline(file, line);
 		Infection_prob = stoi(line);
+		getline(file, line);
+		threshold = stoi(line);
 
 		file.close();
 	}
@@ -532,6 +543,8 @@ void Game::ReadFormInputFile()
 
 		getline(file, line);
 		Infection_prob = stoi(line);
+		getline(file, line);
+		threshold = stoi(line);
 
 		file.close();
 	}
@@ -604,6 +617,8 @@ void Game::ReadFormInputFile()
 
 		getline(file, line);
 		Infection_prob = stoi(line);
+		getline(file, line);
+		threshold = stoi(line);
 
 		file.close();
 	}
@@ -636,6 +651,7 @@ void Game::ReadFormInputFile()
 	randGenObj.setA_maxAttCap(A_maxAttCap);
 
 	randGenObj.setInfection_prob(Infection_prob);
+	randGenObj.setThreshold(threshold);
 }
 
 void Game::Phase1()

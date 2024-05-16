@@ -22,6 +22,7 @@ public:
 class EarthSoldier : public EarthArmyUnit {
 	int UMLjoinTime;
 	bool isInfected;
+	bool isImmune;
 public:
 	// Constructors
 	EarthSoldier();
