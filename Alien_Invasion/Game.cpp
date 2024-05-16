@@ -745,118 +745,123 @@ AlienArmy* Game::getAlienArmy()
 
 
 void Game::writeArmyStatistics(ofstream& outputFile, EarthArmy& earthArmy, string armyName) {
-	outputFile << "\n\nBattle Statistics for " << armyName << " Army:\n";
-
-	int totalUnits = 0;
-	int totalDestroyed = 0;
-	int ES_total = 0, ET_total = 0, EG_total = 0;
-	int ES_destroyed = 0, ET_destroyed = 0, EG_destroyed = 0;
-	double totalDf = 0, totalDd = 0, totalDb = 0;
-
-	// Earth Army Statistics
-	ES_total = earthArmy.getEarthSoldiers().getCount();
-	ET_total = earthArmy.getTanks().getCount();
-	EG_total = earthArmy.getEarthGunneries().getCount();
-	totalUnits = ES_total + ET_total + EG_total;
-
-	// Count destroyed units in killedList
-	ArmyUnit* ptr;
-	killedList.peek(ptr);
-	Node<ArmyUnit*>* current = killedList.Getfront();
-	while (current != nullptr) {
-		ArmyUnit* unit = current->getItem();
-		switch (unit->getType()) {
-		case ES:
-			ES_destroyed++;
-			break;
-		case ET:
-			ET_destroyed++;
-			break;
-		case EG:
-			EG_destroyed++;
-			break;
-		}
-
-		totalDf += unit->getDf();
-		totalDd += unit->getDd();
-		totalDb += unit->getDb();
-
-		current = current->getNext();
-	}
-	totalDestroyed = ES_destroyed + ET_destroyed + EG_destroyed;
-
-	// Output statistics to file
-	outputFile << "- Total number of each unit (ES, ET, EG): "
-		<< ES_total << ", " << ET_total << ", " << EG_total << endl;
-
-
-	// ... (Output percentages of destroyed units for each type)
-
-	outputFile << "- Percentage of total destroyed units relative to total units: "
-		<< (double)totalDestroyed / totalUnits * 100 << "%" << endl;
-
-	outputFile << "- Average of Df: " << totalDf / totalDestroyed << endl;
-	outputFile << "- Average of Dd: " << totalDd / totalDestroyed << endl;
-	outputFile << "- Average of Db: " << totalDb / totalDestroyed << endl;
-	outputFile << "- Df/Db %: " << (totalDf / totalDb) * 100 << "%" << endl;
-	outputFile << "- Dd/Db %: " << (totalDd / totalDb) * 100 << "%" << endl;
+	
 }
 
 
-void Game::writeArmyStatistics(ofstream& outputFile, AlienArmy& alienArmy, string armyName) {
-	outputFile << "\n\nBattle Statistics for " << armyName << " Army:\n";
+void Game::writeArmyStatistics(ofstream& outputFile, EarthArmy& earthArmy, AlienArmy& alienArmy, string armyName1, string armyName2) {
+	outputFile << "\n\nBattle Statistics for " << armyName1 << " Army:\n";
 
-	int totalUnits = 0;
-	int totalDestroyed = 0;
-	int AS_total = 0, AM_total = 0, AD_total = 0;
-	int AS_destroyed = 0, AM_destroyed = 0, AD_destroyed = 0;
-	double totalDf = 0, totalDd = 0, totalDb = 0;
+	int totalUnitsE = 0;
+	int totalDestroyedE = 0;
+	int ES_totalE = 0, ET_totalE = 0, EG_totalE = 0;
+	int ES_destroyedE = 0, ET_destroyedE = 0, EG_destroyedE = 0;
+	double totalDfE = 0, totalDdE = 0, totalDbE = 0;
+	int totalUnitsA = 0;
+	int totalDestroyedA = 0;
+	int AS_totalA = 0, AM_totalA = 0, AD_totalA = 0;
+	int AS_destroyedA = 0, AM_destroyedA = 0, AD_destroyedA = 0;
+	double totalDfA = 0, totalDdA = 0, totalDbA = 0;
+
+	// Earth Army Statistics
+	ES_totalE = earthArmy.getEarthSoldiers().getCount();
+	ET_totalE = earthArmy.getTanks().getCount();
+	EG_totalE = earthArmy.getEarthGunneries().getCount();
+	totalUnitsE = ES_totalE + ET_totalE + EG_totalE;
 
 	// Alien Army Statistics - similar to Earth Army statistics calculation
-	AS_total = alienArmy.getAlienSoldiers().getCount();
-	AM_total = alienArmy.getMonstersCount();
-	AD_total = alienArmy.getAlienDrones().getCount();
-	totalUnits = AS_total + AM_total + AD_total;
-
+	AS_totalA = alienArmy.getAlienSoldiers().getCount();
+	AM_totalA = alienArmy.getMonstersCount();
+	AD_totalA = alienArmy.getAlienDrones().getCount();
+	totalUnitsA = AS_totalA + AM_totalA + AD_totalA;
 	// Count destroyed units in killedList
-	Node<ArmyUnit*>* current = killedList.Getfront();
-	while (current != nullptr) {
-		ArmyUnit* unit = current->getItem();
+	ArmyUnit* unit;
+
+
+	while (killedList.dequeue(unit)) {
+		cout << unit->getType()<< endl;
 		switch (unit->getType()) {
 		case AS:
-			AS_destroyed++;
+			AS_destroyedA++;
+			totalDfA += unit->getDf();
+			totalDdA += unit->getDd();
+			totalDbA += unit->getDb();
 			break;
 		case AM:
-			AM_destroyed++;
+			AM_destroyedA++;
+			totalDfA += unit->getDf();
+			totalDdA += unit->getDd();
+			totalDbA += unit->getDb();
 			break;
 		case AD:
-			AD_destroyed++;
+			AD_destroyedA++;
+			totalDfA += unit->getDf();
+			totalDdA += unit->getDd();
+			totalDbA += unit->getDb();
+			break;
+
+		case ES:
+			ES_destroyedE++;
+			totalDfE += unit->getDf();
+			totalDdE += unit->getDd();
+			totalDbE += unit->getDb();
+			break;
+		case ET:
+			ET_destroyedE++;
+			totalDfE += unit->getDf();
+			totalDdE += unit->getDd();
+			totalDbE += unit->getDb();
+			break;
+		case EG:
+			EG_destroyedE++;
+			totalDfE += unit->getDf();
+			totalDdE += unit->getDd();
+			totalDbE += unit->getDb();
 			break;
 		}
 
-		totalDf += unit->getDf();
-		totalDd += unit->getDd();
-		totalDb += unit->getDb();
+		
+		
 
-		current = current->getNext();
+
 	}
-	totalDestroyed = AS_destroyed + AM_destroyed + AD_destroyed;
+	totalDestroyedA = AS_destroyedA + AM_destroyedA+ AD_destroyedA;
+	totalDestroyedE = ES_destroyedE + ET_destroyedE + EG_destroyedE;
 
 	// Output statistics to file
-	outputFile << "- Total number of each unit (AS, AM, AD): "
-		<< AS_total << ", " << AM_total << ", " << AD_total << endl;
+	outputFile << "- Total number of each unit (ES, ET, EG): "
+		<< ES_totalE << ", " << ET_totalE << ", " << EG_totalE << endl;
 
 
 	// ... (Output percentages of destroyed units for each type)
 
 	outputFile << "- Percentage of total destroyed units relative to total units: "
-		<< (double)totalDestroyed / totalUnits * 100 << "%" << endl;
+		<< (double)totalDestroyedE / totalUnitsE * 100 << "%" << endl;
 
-	outputFile << "- Average of Df: " << totalDf / totalDestroyed << endl;
-	outputFile << "- Average of Dd: " << totalDd / totalDestroyed << endl;
-	outputFile << "- Average of Db: " << totalDb / totalDestroyed << endl;
-	outputFile << "- Df/Db %: " << (totalDf / totalDb) * 100 << "%" << endl;
-	outputFile << "- Dd/Db %: " << (totalDd / totalDb) * 100 << "%" << endl;
+	outputFile << "- Average of Df: " << totalDfE / totalDestroyedE << endl;
+	outputFile << "- Average of Dd: " << totalDdE / totalDestroyedE << endl;
+	outputFile << "- Average of Db: " << totalDbE / totalDestroyedE << endl;
+	outputFile << "- Df/Db %: " << (totalDfE / totalDbE) * 100 << "%" << endl;
+	outputFile << "- Dd/Db %: " << (totalDdE / totalDbE) * 100 << "%" << endl;
+	outputFile << "\n\nBattle Statistics for " << armyName2 << " Army:\n";
+
+
+
+	// Output statistics to file
+	outputFile << "- Total number of each unit (AS, AM, AD): "
+		<< AS_totalA << ", " << AM_totalA << ", " << AD_totalA << endl;
+
+
+	// ... (Output percentages of destroyed units for each type)
+
+	outputFile << "- Percentage of total destroyed units relative to total units: "
+		<< (double)totalDestroyedA / totalUnitsA * 100 << "%" << endl;
+
+	outputFile << "- Average of Df: " << totalDfA / totalDestroyedA << endl;
+	outputFile << "- Average of Dd: " << totalDdA / totalDestroyedA << endl;
+	outputFile << "- Average of Db: " << totalDbA / totalDestroyedA << endl;
+	outputFile << "- Df/Db %: " << (totalDfA / totalDbA) * 100 << "%" << endl;
+	outputFile << "- Dd/Db %: " << (totalDdA/ totalDbA) * 100 << "%" << endl;
 }
 void Game::generateOutputFile(string filename) {
 	ofstream outputFile(filename);
@@ -881,8 +886,8 @@ void Game::generateOutputFile(string filename) {
 	}
 
 	// Calculate and write statistics for both armies
-	writeArmyStatistics(outputFile, earthArmy, "Earth");
-	writeArmyStatistics(outputFile, alienArmy, "Alien");
+	writeArmyStatistics(outputFile, earthArmy, alienArmy,  "Earth", "Alien");
+	
 
 	outputFile.close();
 	cout << "Output file '" << filename << "' generated successfully." << endl;

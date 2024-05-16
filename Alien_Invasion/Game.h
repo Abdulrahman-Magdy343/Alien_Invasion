@@ -31,7 +31,7 @@ public:
 	bool GetSilentMode();
 	EarthArmy* getEarthArmy();
 	AlienArmy* getAlienArmy();
-	void writeArmyStatistics(ofstream& outputFile, AlienArmy& alienArmy, string armyName);
+	void writeArmyStatistics(ofstream& outputFile,  EarthArmy& earthArmy, AlienArmy& alienArmy, string armyName1, string armyName2);
 	void writeArmyStatistics(ofstream& outputFile, EarthArmy& earthArmy, string armyName);
 	void generateOutputFile(string filename);
 	int getInfectionProb();
