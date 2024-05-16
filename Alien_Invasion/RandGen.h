@@ -1,10 +1,12 @@
 #pragma once
 #include <cstdlib>
 #include <ctime>
+#include "SUArmyunit.h"
 #include "EarthArmyUnit.h"
 #include "AlienArmyUnit.h"
 #include "AlienArmy.h"
 #include "EarthArmy.h"
+#include "SUArmy.h"
 #include <fstream>
 
 class RandGen
@@ -21,9 +23,10 @@ class RandGen
     Game* pg;
     AlienArmy& alienArmy;
     EarthArmy& earthArmy;
+    SUArmy& saviorArmy;
 
 public:
-    RandGen(AlienArmy& alien, EarthArmy& earth);
+    RandGen(AlienArmy& alien, EarthArmy& earth, SUArmy& saviorArmy);
 
 
     // Setters

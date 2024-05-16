@@ -9,14 +9,16 @@ class SUArmy
 
 
 public:
-    bool AllAreEmpty();
+    //bool AllAreEmpty();
+    void destructSUArmy();
     void addUnit(SUArmyUnit* newUnit);
     void Attack();
     void Print();
-    void addToUML(SUArmyUnit* newUnit);
+    //void addToUML(SUArmyUnit* newUnit);
 
     // Setters
 
     // Getters
+    LinkedQueue<SUArmyUnit*>& getSaverUnits();
 };
 

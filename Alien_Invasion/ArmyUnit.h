@@ -13,7 +13,8 @@ enum UnitType
 	HU, // Heal Unit
 	AS, // Alien Solider
 	AM, // Alien Monster
-	AD // Alien Drone
+	AD, // Alien Drone
+	SU	// Saver Unit
 };
 class ArmyUnit
 {
