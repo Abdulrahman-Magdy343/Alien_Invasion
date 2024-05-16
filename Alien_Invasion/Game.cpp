@@ -83,12 +83,19 @@ void Game::ReadFormInputFile()
 	int Infection_prob;
 
 	//Choose Input file difficulty
-	int n = 1;
+	int n = 0;
 	cout << "Choose difficulty level  \n1- ModerateEarth ModerateAliens \n2- StrongEarth WeakAliens" <<
-		"\n3- StrongEarth ModerateAliens \n4- StrongEarth StrongAliens \n5- WeakEarth WeakAliens "<<
+		"\n3- StrongEarth ModerateAliens \n4- StrongEarth StrongAliens \n5- WeakEarth WeakAliens " <<
 		"\n6- WeakEarth ModerateAliens \n7- WeakEarth StrongAliens " << endl;
 	cin >> n;
-
+	while (n <= 0 || n > 7)
+	{ 
+		cout << "----->Enter a valid number<----- \n";
+		cout << "Choose difficulty level  \n1- ModerateEarth ModerateAliens \n2- StrongEarth WeakAliens" <<
+			"\n3- StrongEarth ModerateAliens \n4- StrongEarth StrongAliens \n5- WeakEarth WeakAliens "<<
+			"\n6- WeakEarth ModerateAliens \n7- WeakEarth StrongAliens " << endl;
+	cin >> n;
+	}
 	// Easy Input file
 
 	if (n == 1)
