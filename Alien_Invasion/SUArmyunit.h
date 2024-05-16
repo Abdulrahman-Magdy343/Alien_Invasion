@@ -14,21 +14,8 @@ public:
 
 	// Constructors
 	SUArmyUnit();
-	SUArmyUnit(int health, int power, int cap, int timeStamp, Game* pg = nullptr); // Optional Game pointer
+	SUArmyUnit(int health, int power, int cap, Game* pg = nullptr); // Optional Game pointer
 
 
 	void attack() override; // Pure virtual function for attack (forces derived classes to implement)
-};
-
-class EarthSoldier : public SUArmyUnit {
-	int UMLjoinTime;
-	bool isInfected;
-public:
-	// Constructors
-	EarthSoldier();
-	EarthSoldier(int health, int power, int cap, int timeStamp, Game* pg = nullptr); // Optional Game pointer
-	void setUMLjoinTime(int Tj);
-	int getUMLjoinTime();
-	void beInfected();
-	void attack() override; // Override pure virtual function
 };

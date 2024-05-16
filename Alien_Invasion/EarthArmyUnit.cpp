@@ -83,6 +83,7 @@ void EarthSoldier::attack() {
 		for (int i = 0; i < capacity; i++) {
 
 			if (Pgame->getEarthArmy()->getEarthSoldiers().dequeue(u)) {
+				if (u == this) { cout << "nooooooooooooooooooooooooooooooooo before " << i << " after", i--, cout << i<<" "; continue; }
 				if (!Pgame->GetSilentMode()) {
 					if (i == capacity - 1) cout << u->getID();
 					else cout << u->getID() << ", ";
@@ -117,8 +118,7 @@ void EarthSoldier::attack() {
 			Pgame->getEarthArmy()->getEarthSoldiers().enqueue(u);
 		}
 	}
-	if (!Pgame->GetSilentMode())
-		cout << "]\n";
+	if (!Pgame->GetSilentMode())cout << "]\n";
 }
 
 string EarthSoldier::getID()
@@ -266,6 +266,7 @@ void EarthGunnery::attack() {
 	for (int i = 0; i < capacity; i++) {
 		AlienMonster* m;
 		srand(time(0));
+		AScount = (AScount <= -1) ? (-AScount):(AScount);
 		int randNum = rand() % (AScount + 1);
 		m = Pgame->getAlienArmy()->getAlienMonsters()[Pgame->getAlienArmy()->getMonstersCount() - 1];
 		if (m)

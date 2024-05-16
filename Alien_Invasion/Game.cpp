@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game(): randGenObj(alienArmy, earthArmy)
+Game::Game(): randGenObj(alienArmy, earthArmy,saviorArmy)
 {
 	GameOn = true;
 	SilentMode = false;
@@ -37,18 +37,24 @@ void Game::go()
 
 		earthArmy.Attack();
 		alienArmy.Attack();
+		saviorArmy.Attack();
 		earthArmy.infectionSpread();
+		int InfectionPercentage = 100 * this->getEarthArmy()->getNumOfInfectedSoldiers() / this->getEarthArmy()->getEarthSoldiers().getCount();
+		if (InfectionPercentage<=10) {
+			saviorArmy.destructSUArmy();
+		}
 
 		//Printing Part
 		if (!SilentMode) {
 			cout << "Current timestep: " << timeStep << endl;
 			earthArmy.Print();
 			alienArmy.Print();
+			saviorArmy.Print();
 			cout << "================= Killed list ================" << endl;
 			cout << killedList.getCount() << " units [";
 			killedList.print();
 			cout << "]\n";
-			cout << "Infection Percentage : " << this->getEarthArmy()->getNumOfInfectedSoldiers() << endl;
+			cout << "Infection Percentage : " << InfectionPercentage <<" %" << endl;
 			cout << "Press any char to continoue and E for Exit" << endl;
 			char x;
 			cin >> x;
@@ -891,4 +897,9 @@ void Game::generateOutputFile(string filename) {
 int Game::getInfectionProb()
 {
 	return randGenObj.getInfection_prob();
+}
+
+int Game::getThreshold()
+{
+	return randGenObj.getThreshold();
 }

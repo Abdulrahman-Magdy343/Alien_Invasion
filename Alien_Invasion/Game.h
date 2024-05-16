@@ -8,6 +8,7 @@
 #include "AlienArmyUnit.h"
 #include "AlienArmy.h"
 #include "EarthArmy.h"
+#include "SUArmy.h"
 #include "LinkedQueue.h"
 #include "RandGen.h"
 
@@ -16,6 +17,7 @@ class Game
 	int timeStep;
 	AlienArmy alienArmy;
 	EarthArmy earthArmy;
+	SUArmy saviorArmy;
 	LinkedQueue<ArmyUnit*> killedList;
 	RandGen randGenObj;
 	bool GameOn;
@@ -35,6 +37,7 @@ public:
 	void writeArmyStatistics(ofstream& outputFile, EarthArmy& earthArmy, string armyName);
 	void generateOutputFile(string filename);
 	int getInfectionProb();
+	int getThreshold();
 
 };
 

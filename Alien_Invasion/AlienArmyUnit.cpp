@@ -112,12 +112,12 @@ void AlienMonster::attack()
 			if (1) {
 
 				if (A) {
-					s->beInfected();
+					if(!s->getIsInfected())s->beInfected();
 				}
 			}
 			else {
 				if (A < Pgame->getInfectionProb()) {
-					s->beInfected();
+					if (!s->getIsInfected())s->beInfected();
 				}
 
 			}
@@ -218,8 +218,7 @@ AlienDrone::AlienDrone(int health, int power, int cap, int timeStamp, Game* pg) 
 
 void AlienDrone::attack()
 {
-	if (!Pgame->GetSilentMode())
-		cout << "AD " << this->ID << " shots [";
+	if (!Pgame->GetSilentMode())cout << "AD " << this->ID << " shots [";
 	ArrayStack<EarthGunnery*> templist;
 	ArrayStack<EarthTank*> templist2;
 	EarthArmy* earthArmy = Pgame->getEarthArmy();
