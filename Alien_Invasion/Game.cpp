@@ -56,7 +56,7 @@ void Game::go()
 			if (x == 'e' || x == 'E')GameOn = false;
 		}
 		else {
-			if (timeStep == 100) {
+			if (timeStep == 1000) {
 				GameOn = false;
 			}
 		}

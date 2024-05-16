@@ -252,7 +252,7 @@ EarthGunnery::EarthGunnery() {}
 
 EarthGunnery::EarthGunnery(int health, int power, int cap, int timeStamp, Game* pg) :
 	EarthArmyUnit(health, power, cap, timeStamp, EG, pg) {
-
+	srand(time(0));
 }
 
 void EarthGunnery::attack() {
@@ -265,8 +265,8 @@ void EarthGunnery::attack() {
 
 	for (int i = 0; i < capacity; i++) {
 		AlienMonster* m;
-		srand(time(0));
-		int randNum = rand() % (AScount + 1);
+		if(AScount!=0)
+		int randNum = rand() % (AScount);
 		m = Pgame->getAlienArmy()->getAlienMonsters()[Pgame->getAlienArmy()->getMonstersCount() - 1];
 		if (m)
 		{
