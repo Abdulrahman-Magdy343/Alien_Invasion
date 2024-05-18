@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game(): randGenObj(alienArmy, earthArmy)
+Game::Game(): randGenObj(alienArmy, earthArmy,saviorArmy)
 {
 	GameOn = true;
 	SilentMode = false;
@@ -34,21 +34,39 @@ void Game::go()
 	{
 		
 		randGenObj.generate(timeStep);
+		cout << "Current timestep: " << timeStep << endl;
 
+		cout << "========= Units Fighting at the current step =========" << endl;
 		earthArmy.Attack();
 		alienArmy.Attack();
+		saviorArmy.Attack();
 		earthArmy.infectionSpread();
+		int InfectionPercentage = 100 * this->getEarthArmy()->getNumOfInfectedSoldiers() / this->getEarthArmy()->getEarthSoldiers().getCount();
+		if (InfectionPercentage==0) {
+			saviorArmy.destructSUArmy();
+		}
 
 		//Printing Part
 		if (!SilentMode) {
-			cout << "Current timestep: " << timeStep << endl;
 			earthArmy.Print();
 			alienArmy.Print();
+			saviorArmy.Print();
 			cout << "================= Killed list ================" << endl;
 			cout << killedList.getCount() << " units [";
 			killedList.print();
+			cout << "]\n\n";
+
+			cout << "================= UML lists ================" << endl;
+			cout << earthArmy.getSoldiersUML().getCount() << " units [";
+			cout << "]\n\n";
+
+			earthArmy.getSoldiersUML().print();
+			cout << endl;
+			cout << earthArmy.getTanksUML().getCount() << " units [";
+			earthArmy.getTanksUML().print();
+
 			cout << "]\n";
-			cout << "Infection Percentage : " << this->getEarthArmy()->getNumOfInfectedSoldiers() << endl;
+			cout << "Infection Percentage : " << InfectionPercentage <<" %" << endl;
 			cout << "Press any char to continoue and E for Exit" << endl;
 			char x;
 			cin >> x;
@@ -77,9 +95,10 @@ void Game::go()
 void Game::ReadFormInputFile()
 {
 	int armyUnitsNo;
-	int ES_percent, ET_percent, EG_percent, AS_percent, AM_percent, AD_percent, EEU_percent;
+	int ES_percent, ET_percent, EG_percent, AS_percent, AM_percent, AD_percent, EEU_percent,SU_percent;
 	int E_minPower, E_maxPower, E_minHealth, E_maxHealth, E_minAttCap, E_maxAttCap;
 	int A_minPower, A_maxPower, A_minHealth, A_maxHealth, A_minAttCap, A_maxAttCap;
+	int S_minPower, S_maxPower, S_minHealth, S_maxHealth, S_minAttCap, S_maxAttCap;
 	int prob;
 	int Infection_prob;
 	int threshold;
@@ -134,6 +153,9 @@ void Game::ReadFormInputFile()
 		AM_percent = stoi(line);
 		getline(ss3, line, ',');
 		AD_percent = stoi(line);
+		getline(ss3, line, ',');
+		SU_percent = stoi(line);
+
 
 		getline(file, line);
 		prob = stoi(line);
@@ -167,6 +189,21 @@ void Game::ReadFormInputFile()
 		A_minAttCap = stoi(line);
 		getline(ss6, line, ',');
 		A_maxAttCap = stoi(line);
+
+		getline(file, line);
+		stringstream ss7(line);
+		getline(ss7, line, '-');
+		S_minPower = stoi(line);
+		getline(ss7, line, ',');
+		S_maxPower = stoi(line);
+		getline(ss7, line, '-');
+		S_minHealth = stoi(line);
+		getline(ss7, line, ',');
+		S_maxHealth = stoi(line);
+		getline(ss7, line, '-');
+		S_minAttCap = stoi(line);
+		getline(ss7, line, ',');
+		S_maxAttCap = stoi(line);
 		
 		getline(file, line);
 		Infection_prob = stoi(line);
@@ -211,6 +248,8 @@ void Game::ReadFormInputFile()
 		AM_percent = stoi(line);
 		getline(ss3, line, ',');
 		AD_percent = stoi(line);
+		getline(ss3, line, ',');
+		SU_percent = stoi(line);
 
 		getline(file, line);
 		prob = stoi(line);
@@ -244,6 +283,21 @@ void Game::ReadFormInputFile()
 		A_minAttCap = stoi(line);
 		getline(ss6, line, ',');
 		A_maxAttCap = stoi(line);
+
+		getline(file, line);
+		stringstream ss7(line);
+		getline(ss7, line, '-');
+		S_minPower = stoi(line);
+		getline(ss7, line, ',');
+		S_maxPower = stoi(line);
+		getline(ss7, line, '-');
+		S_minHealth = stoi(line);
+		getline(ss7, line, ',');
+		S_maxHealth = stoi(line);
+		getline(ss7, line, '-');
+		S_minAttCap = stoi(line);
+		getline(ss7, line, ',');
+		S_maxAttCap = stoi(line);
 		
 		getline(file, line);
 		Infection_prob = stoi(line);
@@ -286,6 +340,8 @@ void Game::ReadFormInputFile()
 		AM_percent = stoi(line);
 		getline(ss3, line, ',');
 		AD_percent = stoi(line);
+		getline(ss3, line, ',');
+		SU_percent = stoi(line);
 
 		getline(file, line);
 		prob = stoi(line);
@@ -319,6 +375,21 @@ void Game::ReadFormInputFile()
 		A_minAttCap = stoi(line);
 		getline(ss6, line, ',');
 		A_maxAttCap = stoi(line);
+
+		getline(file, line);
+		stringstream ss7(line);
+		getline(ss7, line, '-');
+		S_minPower = stoi(line);
+		getline(ss7, line, ',');
+		S_maxPower = stoi(line);
+		getline(ss7, line, '-');
+		S_minHealth = stoi(line);
+		getline(ss7, line, ',');
+		S_maxHealth = stoi(line);
+		getline(ss7, line, '-');
+		S_minAttCap = stoi(line);
+		getline(ss7, line, ',');
+		S_maxAttCap = stoi(line);
 
 		getline(file, line);
 		Infection_prob = stoi(line);
@@ -359,6 +430,8 @@ void Game::ReadFormInputFile()
 		AM_percent = stoi(line);
 		getline(ss3, line, ',');
 		AD_percent = stoi(line);
+		getline(ss3, line, ',');
+		SU_percent = stoi(line);
 
 		getline(file, line);
 		prob = stoi(line);
@@ -392,6 +465,21 @@ void Game::ReadFormInputFile()
 		A_minAttCap = stoi(line);
 		getline(ss6, line, ',');
 		A_maxAttCap = stoi(line);
+
+		getline(file, line);
+		stringstream ss7(line);
+		getline(ss7, line, '-');
+		S_minPower = stoi(line);
+		getline(ss7, line, ',');
+		S_maxPower = stoi(line);
+		getline(ss7, line, '-');
+		S_minHealth = stoi(line);
+		getline(ss7, line, ',');
+		S_maxHealth = stoi(line);
+		getline(ss7, line, '-');
+		S_minAttCap = stoi(line);
+		getline(ss7, line, ',');
+		S_maxAttCap = stoi(line);
 
 		getline(file, line);
 		Infection_prob = stoi(line);
@@ -433,6 +521,8 @@ void Game::ReadFormInputFile()
 		AM_percent = stoi(line);
 		getline(ss3, line, ',');
 		AD_percent = stoi(line);
+		getline(ss3, line, ',');
+		SU_percent = stoi(line);
 
 		getline(file, line);
 		prob = stoi(line);
@@ -466,6 +556,21 @@ void Game::ReadFormInputFile()
 		A_minAttCap = stoi(line);
 		getline(ss6, line, ',');
 		A_maxAttCap = stoi(line);
+
+		getline(file, line);
+		stringstream ss7(line);
+		getline(ss7, line, '-');
+		S_minPower = stoi(line);
+		getline(ss7, line, ',');
+		S_maxPower = stoi(line);
+		getline(ss7, line, '-');
+		S_minHealth = stoi(line);
+		getline(ss7, line, ',');
+		S_maxHealth = stoi(line);
+		getline(ss7, line, '-');
+		S_minAttCap = stoi(line);
+		getline(ss7, line, ',');
+		S_maxAttCap = stoi(line);
 
 		getline(file, line);
 		Infection_prob = stoi(line);
@@ -507,6 +612,8 @@ void Game::ReadFormInputFile()
 		AM_percent = stoi(line);
 		getline(ss3, line, ',');
 		AD_percent = stoi(line);
+		getline(ss3, line, ',');
+		SU_percent = stoi(line);
 
 		getline(file, line);
 		prob = stoi(line);
@@ -540,6 +647,21 @@ void Game::ReadFormInputFile()
 		A_minAttCap = stoi(line);
 		getline(ss6, line, ',');
 		A_maxAttCap = stoi(line);
+
+		getline(file, line);
+		stringstream ss7(line);
+		getline(ss7, line, '-');
+		S_minPower = stoi(line);
+		getline(ss7, line, ',');
+		S_maxPower = stoi(line);
+		getline(ss7, line, '-');
+		S_minHealth = stoi(line);
+		getline(ss7, line, ',');
+		S_maxHealth = stoi(line);
+		getline(ss7, line, '-');
+		S_minAttCap = stoi(line);
+		getline(ss7, line, ',');
+		S_maxAttCap = stoi(line);
 
 		getline(file, line);
 		Infection_prob = stoi(line);
@@ -581,6 +703,8 @@ void Game::ReadFormInputFile()
 		AM_percent = stoi(line);
 		getline(ss3, line, ',');
 		AD_percent = stoi(line);
+		getline(ss3, line, ',');
+		SU_percent = stoi(line);
 
 		getline(file, line);
 		prob = stoi(line);
@@ -616,6 +740,21 @@ void Game::ReadFormInputFile()
 		A_maxAttCap = stoi(line);
 
 		getline(file, line);
+		stringstream ss7(line);
+		getline(ss7, line, '-');
+		S_minPower = stoi(line);
+		getline(ss7, line, ',');
+		S_maxPower = stoi(line);
+		getline(ss7, line, '-');
+		S_minHealth = stoi(line);
+		getline(ss7, line, ',');
+		S_maxHealth = stoi(line);
+		getline(ss7, line, '-');
+		S_minAttCap = stoi(line);
+		getline(ss7, line, ',');
+		S_maxAttCap = stoi(line);
+
+		getline(file, line);
 		Infection_prob = stoi(line);
 		getline(file, line);
 		threshold = stoi(line);
@@ -643,12 +782,20 @@ void Game::ReadFormInputFile()
 	randGenObj.setAS_percent(AS_percent);
 	randGenObj.setAM_percent(AM_percent);
 	randGenObj.setAD_percent(AD_percent);
+	randGenObj.setSU_percent(SU_percent);
 	randGenObj.setA_minPower(A_minPower);
 	randGenObj.setA_maxPower(A_maxPower);
 	randGenObj.setA_minHealth(A_minHealth);
 	randGenObj.setA_maxHealth(A_maxHealth);
 	randGenObj.setA_minAttCap(A_minAttCap);
 	randGenObj.setA_maxAttCap(A_maxAttCap);
+
+	randGenObj.setS_minPower(S_minPower);
+	randGenObj.setS_maxPower(S_maxPower);
+	randGenObj.setS_minHealth(S_minHealth);
+	randGenObj.setS_maxHealth(S_maxHealth);
+	randGenObj.setS_minAttCap(S_minAttCap);
+	randGenObj.setS_maxAttCap(S_maxAttCap);
 
 	randGenObj.setInfection_prob(Infection_prob);
 	randGenObj.setThreshold(threshold);
@@ -838,11 +985,18 @@ void Game::writeArmyStatistics(ofstream& outputFile, EarthArmy& earthArmy, Alien
 	outputFile << "- Percentage of total destroyed units relative to total units: "
 		<< (double)totalDestroyedE / totalUnitsE * 100 << "%" << endl;
 
+	outputFile << "- Percentage of total infected Earth Solders relative to total Solders: "
+		<< (double)earthArmy.getNumOfInfectedSoldiersTotal() / ES_totalE * 100 << "%" << endl;
+
 	outputFile << "- Average of Df: " << totalDfE / totalDestroyedE << endl;
 	outputFile << "- Average of Dd: " << totalDdE / totalDestroyedE << endl;
 	outputFile << "- Average of Db: " << totalDbE / totalDestroyedE << endl;
 	outputFile << "- Df/Db %: " << (totalDfE / totalDbE) * 100 << "%" << endl;
 	outputFile << "- Dd/Db %: " << (totalDdE / totalDbE) * 100 << "%" << endl;
+
+
+
+
 	outputFile << "\n\nBattle Statistics for " << armyName2 << " Army:\n";
 
 
@@ -896,4 +1050,9 @@ void Game::generateOutputFile(string filename) {
 int Game::getInfectionProb()
 {
 	return randGenObj.getInfection_prob();
+}
+
+int Game::getThreshold()
+{
+	return randGenObj.getThreshold();
 }
