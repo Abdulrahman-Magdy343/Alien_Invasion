@@ -267,9 +267,9 @@ void EarthGunnery::attack() {
 		AlienMonster* m;
 		srand(time(0));
 		//AScount = (AScount <= -1) ? (-AScount):(AScount);
-		int randNum = rand() % (AScount);
 		if (AScount>=0) {
-			cout << AScount << endl;
+			int randNum = rand() % (AScount+1);
+			//cout << AScount << endl;
 			m = Pgame->getAlienArmy()->getAlienMonsters()[randNum];
 			if (m)
 			{
