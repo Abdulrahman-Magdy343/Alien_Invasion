@@ -107,22 +107,13 @@ void AlienMonster::attack()
 		EarthSoldier* s;
 		if (earthArmy->getEarthSoldiers().dequeue(s))
 		{
+			srand(time(0));
 			//add the infection part
 			int A = (1 + rand() % 100);
-			if (1) {
-
-				if (A) {
-					if(!s->getIsInfected())s->beInfected();
-				}
+			
+			if (A < Pgame->getInfectionProb()) {
+				if (!s->getIsInfected())s->beInfected();
 			}
-			else {
-				if (A < Pgame->getInfectionProb()) {
-					if (!s->getIsInfected())s->beInfected();
-				}
-
-			}
-			/*
-			*/
 			if (!Pgame->GetSilentMode())
 
 				cout << s->getID() << ", ";

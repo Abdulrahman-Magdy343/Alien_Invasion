@@ -6,7 +6,7 @@
 class AlienArmy
 {
     const int size = 500;
-    int monstersCount = 0; //if a monster is killed don't forget to decrement 
+    int monstersCount = -1; //if a monster is killed don't forget to decrement 
     LinkedQueue<AlienSoldier*> AlienSoldiers;
     AlienMonster* AlienMonsters[500];
     Deque<AlienDrone*> AlienDrones;
@@ -22,6 +22,7 @@ public:
     void printMonsters() const; 
     int getMonstersCount() const;
     void incrementMonsters();
+    // AlienMonster* pickAlienMonster();
     void removeMonster(int index);
 
     LinkedQueue<AlienSoldier*>& getAlienSoldiers();

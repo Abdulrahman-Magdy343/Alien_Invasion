@@ -167,7 +167,7 @@ void EarthTank::attack() {
 
 		AlienMonster* m;
 		m = alienArmy->getAlienMonsters()[MScount];
-		if (m)
+		if (m&&MScount>=0)
 		{
 			if (!Pgame->GetSilentMode())
 				cout << m->getID() << ", ";
@@ -266,34 +266,38 @@ void EarthGunnery::attack() {
 	for (int i = 0; i < capacity; i++) {
 		AlienMonster* m;
 		srand(time(0));
-		AScount = (AScount <= -1) ? (-AScount):(AScount);
-		int randNum = rand() % (AScount + 1);
-		m = Pgame->getAlienArmy()->getAlienMonsters()[Pgame->getAlienArmy()->getMonstersCount() - 1];
-		if (m)
-		{
-			if (!Pgame->GetSilentMode())
-				cout << m->getID() << ", ";
-
-			if (m->isAlive() && !m->gethasbeenattacked()) {
-				m->setTa(Pgame->getTimeStep());
-				m->setHasBeenAttacked(true);
-			}
-
-			int hel = m->getHealth();
-			int damage = (this->health * this->power / 100) / pow(hel, 0.5);
-			int newhel = hel - damage;
-			if (newhel <= 0)
+		//AScount = (AScount <= -1) ? (-AScount):(AScount);
+		int randNum = rand() % (AScount);
+		if (AScount>=0) {
+			cout << AScount << endl;
+			m = Pgame->getAlienArmy()->getAlienMonsters()[randNum];
+			if (m)
 			{
-				m->setTd(Pgame->getTimeStep());
-				Pgame->getAlienArmy()->removeMonster(Pgame->getAlienArmy()->getMonstersCount());
-				Pgame->addToKilled(m);
-				m->setHealth(0);
+				if (!Pgame->GetSilentMode())
+					cout << m->getID() << ", ";
+
+				if (m->isAlive() && !m->gethasbeenattacked()) {
+					m->setTa(Pgame->getTimeStep());
+					m->setHasBeenAttacked(true);
+				}
+
+				int hel = m->getHealth();
+				int damage = (this->health * this->power / 100) / pow(hel, 0.5);
+				int newhel = hel - damage;
+				if (newhel <= 0)
+				{
+					m->setTd(Pgame->getTimeStep());
+					Pgame->getAlienArmy()->removeMonster(Pgame->getAlienArmy()->getMonstersCount());
+					Pgame->addToKilled(m);
+					m->setHealth(0);
+				}
+				else
+				{
+					m->setHealth(newhel);
+					templist.push(m);
+				}
 			}
-			else
-			{
-				m->setHealth(newhel);
-				templist.push(m);
-			}
+
 		}
 
 		AlienDrone* d;
@@ -395,7 +399,7 @@ void HealUnit::attack()
 			else
 			{
 				int hel = s->getHealth();
-				s->setHealth(hel +0.5* (this->power * this->health / 100) / pow(hel, 0.5));
+				s->setHealth(hel + 0.5 * (this->power * this->health / 100) / pow(hel, 0.5));
 				if ((double)s->getHealth() / s->getInitialHealth() > 0.2)
 				{
 					earthArmy->getEarthSoldiers().enqueue(s);
