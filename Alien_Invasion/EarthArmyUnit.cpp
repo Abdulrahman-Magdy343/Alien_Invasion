@@ -268,8 +268,8 @@ void EarthGunnery::attack() {
 		AlienMonster* m;
 		srand(time(0));
 		//AScount = (AScount <= -1) ? (-AScount):(AScount);
-		if (AScount>=0) {
-			int randNum = rand() % (AScount+1);
+		if (AScount >= 0) {
+			int randNum = rand() % (AScount + 1);
 			//cout << AScount << endl;
 			m = Pgame->getAlienArmy()->getAlienMonsters()[randNum];
 			if (m)
@@ -277,100 +277,101 @@ void EarthGunnery::attack() {
 				if (!Pgame->GetSilentMode())
 					cout << m->getID() << ", ";
 
-			if (m->isAlive()) {
-				m->setTa(Pgame->getTimeStep());
+				if (m->isAlive()) {
+					m->setTa(Pgame->getTimeStep());
+				}
+
+				int hel = m->getHealth();
+				int damage = (this->health * this->power / 100) / pow(hel, 0.5);
+				int newhel = hel - damage;
+
+				if (newhel <= 0)
+				{
+					m->setTd(Pgame->getTimeStep());
+					Pgame->getAlienArmy()->removeMonster(randNum);
+					Pgame->addToKilled(m);
+					m->setHealth(0);
+				}
+				else
+				{
+					m->setHealth(newhel);
+					templist.push(m);
+				}
 			}
 
-			int hel = m->getHealth();
-			int damage = (this->health * this->power / 100) / pow(hel, 0.5);
-			int newhel = hel - damage;
+			AlienDrone* d;
 
-			if (newhel <= 0)
+			if (Pgame->getAlienArmy()->getAlienDrones().removeBack(d))
 			{
-				m->setTd(Pgame->getTimeStep());
-				Pgame->getAlienArmy()->removeMonster(randNum);
-				Pgame->addToKilled(m);
-				m->setHealth(0);
+				if (!Pgame->GetSilentMode())
+					cout << d->getID() << ", ";
+
+				if (d->isAlive()) {
+					d->setTa(Pgame->getTimeStep());
+				}
+
+				int hel = d->getHealth();
+				int damage = (this->health * this->power / 100) / pow(hel, 0.5);
+				int newhel = hel - damage;
+
+				if (newhel <= 0)
+				{
+					d->setTd(Pgame->getTimeStep());
+					Pgame->addToKilled(d);
+					d->setHealth(0);
+				}
+				else
+				{
+					d->setHealth(newhel);
+					templist2.push(d);
+				}
 			}
-			else
+
+			if (Pgame->getAlienArmy()->getAlienDrones().removeFront(d))
 			{
-				m->setHealth(newhel);
-				templist.push(m);
+				if (!Pgame->GetSilentMode())
+					cout << d->getID() << ", ";
+
+				if (d->isAlive() && !d->gethasbeenattacked()) {
+					d->setTa(Pgame->getTimeStep());
+					d->setHasBeenAttacked(true);
+				}
+
+				int hel = d->getHealth();
+				int damage = (this->health * this->power / 100) / pow(hel, 0.5);
+				int newhel = hel - damage;
+
+				if (newhel <= 0)
+				{
+					d->setTd(Pgame->getTimeStep());
+					Pgame->addToKilled(d);
+					d->setHealth(0);
+				}
+				else
+				{
+					d->setHealth(newhel);
+					templist2.push(d);
+				}
 			}
+
 		}
+		if (!Pgame->GetSilentMode())
+			cout << "]\n";
 
-		AlienDrone* d;
-
-		if (Pgame->getAlienArmy()->getAlienDrones().removeBack(d))
+		while (!templist.isEmpty())
 		{
-			if (!Pgame->GetSilentMode())
-				cout << d->getID() << ", ";
-
-			if (d->isAlive()) {
-				d->setTa(Pgame->getTimeStep());
-			}
-
-			int hel = d->getHealth();
-			int damage = (this->health * this->power / 100) / pow(hel, 0.5);
-			int newhel = hel - damage;
-
-			if (newhel <= 0)
-			{
-				d->setTd(Pgame->getTimeStep());
-				Pgame->addToKilled(d);
-				d->setHealth(0);
-			}
-			else
-			{
-				d->setHealth(newhel);
-				templist2.push(d);
-			}
+			AlienMonster* m;
+			templist.pop(m);
+			Pgame->getAlienArmy()->addUnit(m);
 		}
-
-		if (Pgame->getAlienArmy()->getAlienDrones().removeFront(d))
+		while (!templist2.isEmpty())
 		{
-			if (!Pgame->GetSilentMode())
-				cout << d->getID() << ", ";
-
-			if (d->isAlive() && !d->gethasbeenattacked()) {
-				d->setTa(Pgame->getTimeStep());
-				d->setHasBeenAttacked(true);
-			}
-
-			int hel = d->getHealth();
-			int damage = (this->health * this->power / 100) / pow(hel, 0.5);
-			int newhel = hel - damage;
-
-			if (newhel <= 0)
-			{
-				d->setTd(Pgame->getTimeStep());
-				Pgame->addToKilled(d);
-				d->setHealth(0);
-			}
-			else
-			{
-				d->setHealth(newhel);
-				templist2.push(d);
-			}
+			AlienDrone* d;
+			templist2.pop(d);
+			Pgame->getAlienArmy()->addUnit(d);
 		}
 
 	}
-	if (!Pgame->GetSilentMode())
-		cout << "]\n";
-
-	while (!templist.isEmpty())
-	{
-		AlienMonster* m;
-		templist.pop(m);
-		Pgame->getAlienArmy()->addUnit(m);
-	}
-	while (!templist2.isEmpty())
-	{
-		AlienDrone* d;
-		templist2.pop(d);
-		Pgame->getAlienArmy()->addUnit(d);
-	}
-
 }
 
 

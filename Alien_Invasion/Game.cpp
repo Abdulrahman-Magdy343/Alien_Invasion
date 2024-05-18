@@ -896,156 +896,156 @@ void Game::writeArmyStatistics(ofstream& outputFile, EarthArmy& earthArmy, strin
 }
 
 
-void Game::writeArmyStatistics(ofstream& outputFile, EarthArmy& earthArmy, AlienArmy& alienArmy, string armyName1, string armyName2) {
-	outputFile << "\n\nBattle Statistics for " << armyName1 << " Army:\n";
-
-	int totalUnitsE = 0;
-	int totalDestroyedE = 0;
-	int ES_totalE = 0, ET_totalE = 0, EG_totalE = 0;
-	int ES_destroyedE = 0, ET_destroyedE = 0, EG_destroyedE = 0;
-	double totalDfE = 0, totalDdE = 0, totalDbE = 0;
-	int totalUnitsA = 0;
-	int totalDestroyedA = 0;
-	int AS_totalA = 0, AM_totalA = 0, AD_totalA = 0;
-	int AS_destroyedA = 0, AM_destroyedA = 0, AD_destroyedA = 0;
-	double totalDfA = 0, totalDdA = 0, totalDbA = 0;
-
-	// Earth Army Statistics
-	ES_totalE = earthArmy.getEarthSoldiers().getCount();
-	ET_totalE = earthArmy.getTanks().getCount();
-	EG_totalE = earthArmy.getEarthGunneries().getCount();
-	totalUnitsE = ES_totalE + ET_totalE + EG_totalE;
-
-	// Alien Army Statistics - similar to Earth Army statistics calculation
-	AS_totalA = alienArmy.getAlienSoldiers().getCount();
-	AM_totalA = alienArmy.getMonstersCount();
-	AD_totalA = alienArmy.getAlienDrones().getCount();
-	totalUnitsA = AS_totalA + AM_totalA + AD_totalA;
-	// Count destroyed units in killedList
-	ArmyUnit* unit;
-
-
-	while (killedList.dequeue(unit)) {
-		cout << unit->getType()<< endl;
-		switch (unit->getType()) {
-		case AS:
-			AS_destroyedA++;
-			totalDfA += unit->getDf();
-			totalDdA += unit->getDd();
-			totalDbA += unit->getDb();
-			break;
-		case AM:
-			AM_destroyedA++;
-			totalDfA += unit->getDf();
-			totalDdA += unit->getDd();
-			totalDbA += unit->getDb();
-			break;
-		case AD:
-			AD_destroyedA++;
-			totalDfA += unit->getDf();
-			totalDdA += unit->getDd();
-			totalDbA += unit->getDb();
-			break;
-
-		case ES:
-			ES_destroyedE++;
-			totalDfE += unit->getDf();
-			totalDdE += unit->getDd();
-			totalDbE += unit->getDb();
-			break;
-		case ET:
-			ET_destroyedE++;
-			totalDfE += unit->getDf();
-			totalDdE += unit->getDd();
-			totalDbE += unit->getDb();
-			break;
-		case EG:
-			EG_destroyedE++;
-			totalDfE += unit->getDf();
-			totalDdE += unit->getDd();
-			totalDbE += unit->getDb();
-			break;
-		}
-
-		
-		
-
-
-	}
-	totalDestroyedA = AS_destroyedA + AM_destroyedA+ AD_destroyedA;
-	totalDestroyedE = ES_destroyedE + ET_destroyedE + EG_destroyedE;
-
-	// Output statistics to file
-	outputFile << "- Total number of each unit (ES, ET, EG): "
-		<< ES_totalE << ", " << ET_totalE << ", " << EG_totalE << endl;
-
-
-	// ... (Output percentages of destroyed units for each type)
-
-	outputFile << "- Percentage of total destroyed units relative to total units: "
-		<< (double)totalDestroyedE / totalUnitsE * 100 << "%" << endl;
-
-	outputFile << "- Percentage of total infected Earth Solders relative to total Solders: "
-		<< (double)earthArmy.getNumOfInfectedSoldiersTotal() / ES_total * 100 << "%" << endl;
-
-	outputFile << "- Average of Df: " << totalDf / totalDestroyed << endl;
-	outputFile << "- Average of Dd: " << totalDd / totalDestroyed << endl;
-	outputFile << "- Average of Db: " << totalDb / totalDestroyed << endl;
-	outputFile << "- Df/Db %: " << (totalDf / totalDb) * 100 << "%" << endl;
-	outputFile << "- Dd/Db %: " << (totalDd / totalDb) * 100 << "%" << endl;
-}
-
-
-void Game::writeArmyStatistics(ofstream& outputFile, AlienArmy& alienArmy, string armyName) {
-	outputFile << "\n\nBattle Statistics for " << armyName << " Army:\n";
-
-
-
-	// Output statistics to file
-	outputFile << "- Total number of each unit (AS, AM, AD): "
-		<< AS_totalA << ", " << AM_totalA << ", " << AD_totalA << endl;
-
-
-	// ... (Output percentages of destroyed units for each type)
-
-	outputFile << "- Percentage of total destroyed units relative to total units: "
-		<< (double)totalDestroyedA / totalUnitsA * 100 << "%" << endl;
-
-	outputFile << "- Average of Df: " << totalDfA / totalDestroyedA << endl;
-	outputFile << "- Average of Dd: " << totalDdA / totalDestroyedA << endl;
-	outputFile << "- Average of Db: " << totalDbA / totalDestroyedA << endl;
-	outputFile << "- Df/Db %: " << (totalDfA / totalDbA) * 100 << "%" << endl;
-	outputFile << "- Dd/Db %: " << (totalDdA/ totalDbA) * 100 << "%" << endl;
-}
-void Game::generateOutputFile(string filename) {
-	ofstream outputFile(filename);
-
-	if (!outputFile.is_open()) {
-		cout << "Error: Unable to open output file!" << endl;
-		return;
-	}
-
-	// Sort the killed list by destruction time (Td)
-	killedList.Sort();
-
-	outputFile << "Td\tID\tTj\tDf\tDd\tDb\n";
-	Node<ArmyUnit*>* current = killedList.Getfront();
-
-	while (current != nullptr) {
-		ArmyUnit* unit = current->getItem();
-		outputFile << unit->getTd() << "\t" << unit->getID() << "\t"
-			<< unit->getJoinTime() << "\t" << unit->getDf() << "\t"
-			<< unit->getDd() << "\t" << unit->getDb() << endl;
-		current = current->getNext();
-	}
-
-	// Calculate and write statistics for both armies
-	writeArmyStatistics(outputFile, earthArmy, alienArmy,  "Earth", "Alien");
-	
-
-	outputFile.close();
-	cout << "Output file '" << filename << "' generated successfully." << endl;
-}
+//void Game::writeArmyStatistics(ofstream& outputFile, EarthArmy& earthArmy, AlienArmy& alienArmy, string armyName1, string armyName2) {
+//	outputFile << "\n\nBattle Statistics for " << armyName1 << " Army:\n";
+//
+//	int totalUnitsE = 0;
+//	int totalDestroyedE = 0;
+//	int ES_totalE = 0, ET_totalE = 0, EG_totalE = 0;
+//	int ES_destroyedE = 0, ET_destroyedE = 0, EG_destroyedE = 0;
+//	double totalDfE = 0, totalDdE = 0, totalDbE = 0;
+//	int totalUnitsA = 0;
+//	int totalDestroyedA = 0;
+//	int AS_totalA = 0, AM_totalA = 0, AD_totalA = 0;
+//	int AS_destroyedA = 0, AM_destroyedA = 0, AD_destroyedA = 0;
+//	double totalDfA = 0, totalDdA = 0, totalDbA = 0;
+//
+//	// Earth Army Statistics
+//	ES_totalE = earthArmy.getEarthSoldiers().getCount();
+//	ET_totalE = earthArmy.getTanks().getCount();
+//	EG_totalE = earthArmy.getEarthGunneries().getCount();
+//	totalUnitsE = ES_totalE + ET_totalE + EG_totalE;
+//
+//	// Alien Army Statistics - similar to Earth Army statistics calculation
+//	AS_totalA = alienArmy.getAlienSoldiers().getCount();
+//	AM_totalA = alienArmy.getMonstersCount();
+//	AD_totalA = alienArmy.getAlienDrones().getCount();
+//	totalUnitsA = AS_totalA + AM_totalA + AD_totalA;
+//	// Count destroyed units in killedList
+//	ArmyUnit* unit;
+//
+//
+//	while (killedList.dequeue(unit)) {
+//		cout << unit->getType()<< endl;
+//		switch (unit->getType()) {
+//		case AS:
+//			AS_destroyedA++;
+//			totalDfA += unit->getDf();
+//			totalDdA += unit->getDd();
+//			totalDbA += unit->getDb();
+//			break;
+//		case AM:
+//			AM_destroyedA++;
+//			totalDfA += unit->getDf();
+//			totalDdA += unit->getDd();
+//			totalDbA += unit->getDb();
+//			break;
+//		case AD:
+//			AD_destroyedA++;
+//			totalDfA += unit->getDf();
+//			totalDdA += unit->getDd();
+//			totalDbA += unit->getDb();
+//			break;
+//
+//		case ES:
+//			ES_destroyedE++;
+//			totalDfE += unit->getDf();
+//			totalDdE += unit->getDd();
+//			totalDbE += unit->getDb();
+//			break;
+//		case ET:
+//			ET_destroyedE++;
+//			totalDfE += unit->getDf();
+//			totalDdE += unit->getDd();
+//			totalDbE += unit->getDb();
+//			break;
+//		case EG:
+//			EG_destroyedE++;
+//			totalDfE += unit->getDf();
+//			totalDdE += unit->getDd();
+//			totalDbE += unit->getDb();
+//			break;
+//		}
+//
+//		
+//		
+//
+//
+//	}
+//	totalDestroyedA = AS_destroyedA + AM_destroyedA+ AD_destroyedA;
+//	totalDestroyedE = ES_destroyedE + ET_destroyedE + EG_destroyedE;
+//
+//	// Output statistics to file
+//	outputFile << "- Total number of each unit (ES, ET, EG): "
+//		<< ES_totalE << ", " << ET_totalE << ", " << EG_totalE << endl;
+//
+//
+//	// ... (Output percentages of destroyed units for each type)
+//
+//	outputFile << "- Percentage of total destroyed units relative to total units: "
+//		<< (double)totalDestroyedE / totalUnitsE * 100 << "%" << endl;
+//
+//	outputFile << "- Percentage of total infected Earth Solders relative to total Solders: "
+//		<< (double)earthArmy.getNumOfInfectedSoldiersTotal() / ES_total * 100 << "%" << endl;
+//
+//	outputFile << "- Average of Df: " << totalDf / totalDestroyed << endl;
+//	outputFile << "- Average of Dd: " << totalDd / totalDestroyed << endl;
+//	outputFile << "- Average of Db: " << totalDb / totalDestroyed << endl;
+//	outputFile << "- Df/Db %: " << (totalDf / totalDb) * 100 << "%" << endl;
+//	outputFile << "- Dd/Db %: " << (totalDd / totalDb) * 100 << "%" << endl;
+//}
+//
+//
+//void Game::writeArmyStatistics(ofstream& outputFile, AlienArmy& alienArmy, string armyName) {
+//	outputFile << "\n\nBattle Statistics for " << armyName << " Army:\n";
+//
+//
+//
+//	// Output statistics to file
+//	outputFile << "- Total number of each unit (AS, AM, AD): "
+//		<< AS_totalA << ", " << AM_totalA << ", " << AD_totalA << endl;
+//
+//
+//	// ... (Output percentages of destroyed units for each type)
+//
+//	outputFile << "- Percentage of total destroyed units relative to total units: "
+//		<< (double)totalDestroyedA / totalUnitsA * 100 << "%" << endl;
+//
+//	outputFile << "- Average of Df: " << totalDfA / totalDestroyedA << endl;
+//	outputFile << "- Average of Dd: " << totalDdA / totalDestroyedA << endl;
+//	outputFile << "- Average of Db: " << totalDbA / totalDestroyedA << endl;
+//	outputFile << "- Df/Db %: " << (totalDfA / totalDbA) * 100 << "%" << endl;
+//	outputFile << "- Dd/Db %: " << (totalDdA/ totalDbA) * 100 << "%" << endl;
+//}
+//void Game::generateOutputFile(string filename) {
+//	ofstream outputFile(filename);
+//
+//	if (!outputFile.is_open()) {
+//		cout << "Error: Unable to open output file!" << endl;
+//		return;
+//	}
+//
+//	// Sort the killed list by destruction time (Td)
+//	killedList.Sort();
+//
+//	outputFile << "Td\tID\tTj\tDf\tDd\tDb\n";
+//	Node<ArmyUnit*>* current = killedList.Getfront();
+//
+//	while (current != nullptr) {
+//		ArmyUnit* unit = current->getItem();
+//		outputFile << unit->getTd() << "\t" << unit->getID() << "\t"
+//			<< unit->getJoinTime() << "\t" << unit->getDf() << "\t"
+//			<< unit->getDd() << "\t" << unit->getDb() << endl;
+//		current = current->getNext();
+//	}
+//
+//	// Calculate and write statistics for both armies
+//	writeArmyStatistics(outputFile, earthArmy, alienArmy,  "Earth", "Alien");
+//	
+//
+//	outputFile.close();
+//	cout << "Output file '" << filename << "' generated successfully." << endl;
+//}
 
 int Game::getInfectionProb()
 {
