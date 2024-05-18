@@ -388,14 +388,24 @@ void RandGen::generate(int timeStep)
 			}
 
 		}
-		int InfectionPercentage = 100 * earthArmy.getNumOfInfectedSoldiers() / earthArmy.getEarthSoldiers().getCount();
+		int InfectionPercentage;
+		if (earthArmy.getEarthSoldiers().getCount() != 0)
+			InfectionPercentage = 100 * earthArmy.getNumOfInfectedSoldiers() / earthArmy.getEarthSoldiers().getCount();
+		else
+			InfectionPercentage = 0;
+
 		if (InfectionPercentage >= threshold) {
 			B = (1 + rand() % 100);
 
 			int power, health, attCapacity;
-			power = S_minPower + rand() % (S_maxPower - S_minPower);
-			health = S_minHealth + rand() % (S_maxHealth - S_minHealth);
-			attCapacity = S_minAttCap + rand() % (S_maxAttCap - S_minAttCap);
+			if (S_maxPower == S_minPower) {
+				power = S_minPower; health = S_minHealth; 	attCapacity = S_minAttCap;
+			}
+			else {
+				power = S_minPower + rand() % (S_maxPower - S_minPower);
+				health = S_minHealth + rand() % (S_maxHealth - S_minHealth);
+				attCapacity = S_minAttCap + rand() % (S_maxAttCap - S_minAttCap);
+			}
 			SUArmyUnit* newUnit = new SUArmyUnit(health,power, attCapacity,pg);
 			saviorArmy.addUnit(newUnit);
 		}

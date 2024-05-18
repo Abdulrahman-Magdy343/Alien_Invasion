@@ -2,6 +2,7 @@
 
 AlienArmy::AlienArmy()
 {
+    monstersCount = 0;
 }
 
 bool AlienArmy::AllAreEmpty()
@@ -56,9 +57,9 @@ void AlienArmy::Attack()
         d1->attack();
         d1->setPower(d1->getPower() - d2->getPower());
     }
-    if (monstersCount>0) {
+    if (monstersCount > 0) { // Check if there are monsters to attack
         srand(time(0));
-        int randNum = (rand() % monstersCount);
+        int randNum = 1+ (rand() % monstersCount); // Index will be valid (1 to monstersCount - 1)
         AlienMonster* m;
         m = AlienMonsters[randNum];
         m->attack();
@@ -73,6 +74,7 @@ void AlienArmy::Print()
     AlienSoldiers.print();
     cout << "]\n";
 
+   
     cout << 1+monstersCount << " AM [";
     printMonsters();
     cout << "]\n";
@@ -83,10 +85,11 @@ void AlienArmy::Print()
 
 }
 
-void AlienArmy::printMonsters() const
-{
-    for (int i = 0; i <= monstersCount; i++)
-    {
+void AlienArmy::printMonsters() const {
+
+
+    for (int i = 1; i < monstersCount; i++) { 
+        
         cout << AlienMonsters[i]->getID() << " ";
     }
 }

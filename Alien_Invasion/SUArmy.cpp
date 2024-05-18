@@ -1,5 +1,16 @@
 #include "SUArmy.h"
 
+bool SUArmy::AllAreEmpty()
+{
+	if (SaverUnits.isEmpty())return true;
+	else
+	{
+		return false;
+
+	}
+	
+}
+
 void SUArmy::destructSUArmy()
 {
 	SUArmyUnit* s;

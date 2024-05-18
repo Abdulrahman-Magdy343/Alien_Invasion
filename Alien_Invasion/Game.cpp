@@ -1,5 +1,5 @@
 #include "Game.h"
-
+using namespace std;
 Game::Game(): randGenObj(alienArmy, earthArmy,saviorArmy)
 {
 	GameOn = true;
@@ -22,6 +22,7 @@ void Game::go()
 		else
 		{
 			cout << "Please enter correct number" << endl;
+			
 		}
 
 
@@ -34,22 +35,47 @@ void Game::go()
 	{
 		
 		randGenObj.generate(timeStep);
+		if(!SilentMode)
 		cout << "Current timestep: " << timeStep << endl;
 
+		
+		if (!SilentMode)
+
 		cout << "========= Units Fighting at the current step =========" << endl;
+		
 		earthArmy.Attack();
 		alienArmy.Attack();
 		saviorArmy.Attack();
 		earthArmy.infectionSpread();
-		int InfectionPercentage = 100 * this->getEarthArmy()->getNumOfInfectedSoldiers() / this->getEarthArmy()->getEarthSoldiers().getCount();
+
+		int InfectionPercentage;
+		if (this->getEarthArmy()->getEarthSoldiers().getCount()!=0) {
+			InfectionPercentage = 100 * this->getEarthArmy()->getNumOfInfectedSoldiers() / this->getEarthArmy()->getEarthSoldiers().getCount();
+		}
+		else
+		{
+			InfectionPercentage = 0;
+		}
 		if (InfectionPercentage==0) {
 			saviorArmy.destructSUArmy();
 		}
+		//ArrayStack<HealUnit*>& healUnits = earthArmy.getHealUnits();
+		//for (int i = 0; i < healUnits.getCount(); i++) {
+		//	HealUnit* h = nullptr;
+		//	healUnits.peek(h); // Get the current HealUnit
+		//	if (h && h->shouldBeDestroyed) {
+		//		healUnits.pop(h); // Remove it from the stack
+		//		addToKilled(h);   // Destroy it 
+		//	}
+		//}
 
 		//Printing Part
 		if (!SilentMode) {
+			if(!earthArmy.AllAreEmpty())
 			earthArmy.Print();
+			if (!alienArmy.AllAreEmpty())
 			alienArmy.Print();
+			if (!saviorArmy.AllAreEmpty())
 			saviorArmy.Print();
 			cout << "================= Killed list ================" << endl;
 			cout << killedList.getCount() << " units [";
@@ -78,8 +104,20 @@ void Game::go()
 				GameOn = false;
 			}
 		}
-	
 
+	
+		if (this->getEarthArmy()->AllAreEmpty() && this->getAlienArmy()->AllAreEmpty()) {
+			GameOn = false;
+			cout << "DRAW" << endl;
+		}
+		else if (this->getEarthArmy()->AllAreEmpty() && !this->getAlienArmy()->AllAreEmpty()) {
+			GameOn = false;
+			cout << "Alien Won" << endl;
+		}
+		else if (!this->getEarthArmy()->AllAreEmpty() && this->getAlienArmy()->AllAreEmpty()) {
+			GameOn = false;
+			cout << "Earth Won" << endl;
+		}
 		
 		
 		// at end of each iteration
@@ -926,7 +964,7 @@ void Game::writeArmyStatistics(ofstream& outputFile, EarthArmy& earthArmy, Alien
 
 
 	while (killedList.dequeue(unit)) {
-		cout << unit->getType()<< endl;
+		/*cout << unit->getType()<< endl;*/
 		switch (unit->getType()) {
 		case AS:
 			AS_destroyedA++;
@@ -1026,7 +1064,7 @@ void Game::generateOutputFile(string filename) {
 	}
 
 	// Sort the killed list by destruction time (Td)
-	killedList.Sort();
+	/*killedList.Sort();*/
 
 	outputFile << "Td\tID\tTj\tDf\tDd\tDb\n";
 	Node<ArmyUnit*>* current = killedList.Getfront();

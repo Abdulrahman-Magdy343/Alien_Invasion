@@ -59,5 +59,6 @@ class HealUnit :public EarthArmyUnit {
 public:
 	HealUnit();
 	HealUnit(int health, int power, int cap, int timeStamp, Game* pg = nullptr);
+	bool shouldBeDestroyed = false;
 	void attack() override;
 };

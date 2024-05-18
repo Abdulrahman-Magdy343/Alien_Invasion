@@ -60,9 +60,9 @@ void EarthSoldier::attack() {
 				int damage = (this->health * this->power / 100) / pow(hel, 0.5);
 				int newhel = hel - damage;
 				if (newhel <= 0) { // Add killed unit only when health is zero or below
-					u->setTd(Pgame->getTimeStep());
+					
 					Pgame->addToKilled(u);
-					u->setHealth(0);
+					
 				}
 				else {
 					u->setHealth(newhel);
@@ -98,9 +98,9 @@ void EarthSoldier::attack() {
 				int damage = (this->health * this->power / 100) / pow(hel, 0.5);
 				int newhel = hel - damage;
 				if (newhel <= 0) { // Add killed unit only when health is zero or below
-					u->setTd(Pgame->getTimeStep());
+					
 					Pgame->addToKilled(u);
-					u->setHealth(0);
+				
 				}
 				else {
 					u->setHealth(newhel);
@@ -183,9 +183,9 @@ void EarthTank::attack() {
 			int newhel = hel - damage;
 			if (newhel <= 0)
 			{
-				m->setTd(Pgame->getTimeStep());
+				
 				Pgame->addToKilled(m);
-				m->setHealth(0);
+			
 			}
 			else
 			{
@@ -215,9 +215,7 @@ void EarthTank::attack() {
 				int newhel = hel - damage;
 				if (newhel <= 0)
 				{
-					u->setTd(Pgame->getTimeStep());
 					Pgame->addToKilled(u);
-					u->setHealth(0);
 				}
 				else
 				{
@@ -262,6 +260,7 @@ void EarthGunnery::attack() {
 	int AScount = Pgame->getAlienArmy()->getMonstersCount();
 
 	ArrayStack<AlienDrone*> templist2;
+	if (AScount < 0)AScount = 0;
 	int randNum = rand() % (AScount + 1);
 
 	for (int i = 0; i < capacity; i++) {
@@ -287,10 +286,10 @@ void EarthGunnery::attack() {
 
 				if (newhel <= 0)
 				{
-					m->setTd(Pgame->getTimeStep());
+					
 					Pgame->getAlienArmy()->removeMonster(randNum);
 					Pgame->addToKilled(m);
-					m->setHealth(0);
+				
 				}
 				else
 				{
@@ -316,9 +315,9 @@ void EarthGunnery::attack() {
 
 				if (newhel <= 0)
 				{
-					d->setTd(Pgame->getTimeStep());
+				
 					Pgame->addToKilled(d);
-					d->setHealth(0);
+				
 				}
 				else
 				{
@@ -343,9 +342,9 @@ void EarthGunnery::attack() {
 
 				if (newhel <= 0)
 				{
-					d->setTd(Pgame->getTimeStep());
+					
 					Pgame->addToKilled(d);
-					d->setHealth(0);
+				
 				}
 				else
 				{
@@ -413,8 +412,10 @@ void HealUnit::attack()
 				else
 					templist.push(s);
 			}
+			shouldBeDestroyed = true;
 		}
 		else break;
+		
 	}
 
 	while (!templist.isEmpty())
