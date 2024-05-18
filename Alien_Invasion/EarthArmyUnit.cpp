@@ -301,45 +301,45 @@ void EarthGunnery::attack() {
 		}
 		AlienDrone* d;
 
-		if (Pgame->getAlienArmy()->getAlienDrones().removeBack(d))
-		{
-			if (!Pgame->GetSilentMode())
-				cout << d->getID() << ", ";
-
-			if (d->isAlive()) {
-				d->setTa(Pgame->getTimeStep());
-			}
-
-			int hel = d->getHealth();
-			int damage = (this->health * this->power / 100) / pow(hel, 0.5);
-			int newhel = hel - damage;
-
-			if (newhel <= 0)
+			if (Pgame->getAlienArmy()->getAlienDrones().removeBack(d))
 			{
-				d->setTd(Pgame->getTimeStep());
-				Pgame->addToKilled(d);
-				d->setHealth(0);
+				if (!Pgame->GetSilentMode())
+					cout << d->getID() << ", ";
+
+				if (d->isAlive()) {
+					d->setTa(Pgame->getTimeStep());
+				}
+
+				int hel = d->getHealth();
+				int damage = (this->health * this->power / 100) / pow(hel, 0.5);
+				int newhel = hel - damage;
+
+				if (newhel <= 0)
+				{
+					d->setTd(Pgame->getTimeStep());
+					Pgame->addToKilled(d);
+					d->setHealth(0);
+				}
+				else
+				{
+					d->setHealth(newhel);
+					templist2.push(d);
+				}
 			}
-			else
+
+			if (Pgame->getAlienArmy()->getAlienDrones().removeFront(d))
 			{
-				d->setHealth(newhel);
-				templist2.push(d);
-			}
-		}
+				if (!Pgame->GetSilentMode())
+					cout << d->getID() << ", ";
 
-		if (Pgame->getAlienArmy()->getAlienDrones().removeFront(d))
-		{
-			if (!Pgame->GetSilentMode())
-				cout << d->getID() << ", ";
+				if (d->isAlive() && !d->gethasbeenattacked()) {
+					d->setTa(Pgame->getTimeStep());
+					d->setHasBeenAttacked(true);
+				}
 
-			if (d->isAlive() && !d->gethasbeenattacked()) {
-				d->setTa(Pgame->getTimeStep());
-				d->setHasBeenAttacked(true);
-			}
-
-			int hel = d->getHealth();
-			int damage = (this->health * this->power / 100) / pow(hel, 0.5);
-			int newhel = hel - damage;
+				int hel = d->getHealth();
+				int damage = (this->health * this->power / 100) / pow(hel, 0.5);
+				int newhel = hel - damage;
 
 			if (newhel <= 0)
 			{
