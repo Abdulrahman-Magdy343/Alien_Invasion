@@ -63,6 +63,9 @@ void RandGen::setAM_percent(int percent) {
 void RandGen::setAD_percent(int percent) {
 	AD_percent = percent;
 }
+void RandGen::setSU_percent(int percent) {
+	SU_percent = percent;
+}
 
 void RandGen::setProb(int probability) {
 	prob = probability;
@@ -128,6 +131,36 @@ void RandGen::setA_maxAttCap(int maxAttCap)
 	A_maxAttCap = maxAttCap;
 }
 
+void RandGen::setS_minPower(int minRange)
+{
+	S_minPower = minRange;
+}
+
+void RandGen::setS_maxPower(int maxRange)
+{
+	S_maxPower = maxRange;
+}
+
+void RandGen::setS_minHealth(int minHealth)
+{
+	S_minHealth = minHealth;
+}
+
+void RandGen::setS_maxHealth(int maxHealth)
+{
+	S_maxHealth = maxHealth;
+}
+
+void RandGen::setS_minAttCap(int minAttCap)
+{
+	S_minAttCap = minAttCap;
+}
+
+void RandGen::setS_maxAttCap(int maxAttCap)
+{
+	S_maxAttCap = maxAttCap;
+}
+
 void RandGen::setInfection_prob(int Inf_prob)
 {
 	Infection_prob = Inf_prob;
@@ -172,6 +205,10 @@ int RandGen::getAM_percent() const {
 
 int RandGen::getAD_percent() const {
 	return AD_percent;
+}
+
+int RandGen::getSU_percent() const {
+	return SU_percent;
 }
 
 int RandGen::getEEU_percent() const
@@ -241,6 +278,36 @@ int RandGen::getA_minAttCap() const
 int RandGen::getA_maxAttCap() const
 {
 	return A_maxAttCap;
+}
+
+int RandGen::getS_minPower() const
+{
+	return S_minPower;
+}
+
+int RandGen::getS_maxPower() const
+{
+	return S_maxPower;
+}
+
+int RandGen::getS_minHealth() const
+{
+	return S_minHealth;
+}
+
+int RandGen::getS_maxHealth() const
+{
+	return S_maxHealth;
+}
+
+int RandGen::getS_minAttCap() const
+{
+	return S_minAttCap;
+}
+
+int RandGen::getS_maxAttCap() const
+{
+	return S_maxAttCap;
 }
 
 int RandGen::getInfection_prob() const
@@ -326,9 +393,9 @@ void RandGen::generate(int timeStep)
 			B = (1 + rand() % 100);
 
 			int power, health, attCapacity;
-			power = A_minPower + rand() % (A_maxPower - A_minPower);
-			health = A_minHealth + rand() % (A_maxHealth - A_minHealth);
-			attCapacity = A_minAttCap + rand() % (A_maxAttCap - A_minAttCap);
+			power = S_minPower + rand() % (S_maxPower - S_minPower);
+			health = S_minHealth + rand() % (S_maxHealth - S_minHealth);
+			attCapacity = S_minAttCap + rand() % (S_maxAttCap - S_minAttCap);
 			SUArmyUnit* newUnit = new SUArmyUnit(health,power, attCapacity,pg);
 			saviorArmy.addUnit(newUnit);
 		}

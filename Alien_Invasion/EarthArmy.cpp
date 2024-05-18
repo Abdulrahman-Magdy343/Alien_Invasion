@@ -90,9 +90,9 @@ void EarthArmy::addToUML(EarthArmyUnit* newUnit)
 void EarthArmy::infectionSpread()
 {
 	for (int i = 0; i < noOfInfectedSoldiers; i++) {
-		int A = (1 + rand() % 100);
-
-		if (A < 2) {
+		srand(time(0)); 
+		if (rand() % 100 < 2) {
+			
 			if (!EarthSoldiers.isEmpty())
 			{
 				Node<EarthSoldier*>* temp = this->EarthSoldiers.Getfront();
@@ -110,7 +110,12 @@ void EarthArmy::infectionSpread()
 }
 void EarthArmy::addInfectedSoldier()
 {
-	noOfInfectedSoldiers++;
+	noOfInfectedSoldiers++; addInfectedSoldierTotal();
+}
+
+void EarthArmy::addInfectedSoldierTotal()
+{
+	noOfInfectedSoldiersTotal++;
 }
 
 void EarthArmy::decrementInfectedSoldier()
@@ -149,4 +154,9 @@ LinkedQueue<EarthTank*>& EarthArmy::getTanksUML() {
 int EarthArmy::getNumOfInfectedSoldiers()
 {
 	return noOfInfectedSoldiers;
+}
+
+int EarthArmy::getNumOfInfectedSoldiersTotal()
+{
+	return noOfInfectedSoldiersTotal;
 }
