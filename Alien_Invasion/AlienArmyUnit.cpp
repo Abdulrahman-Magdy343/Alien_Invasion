@@ -36,7 +36,7 @@ void AlienSoldier::attack()
 		EarthArmy* earthArmy = Pgame->getEarthArmy();
 		for (int i = 0; i < capacity; i++) {
 			EarthSoldier* u;
-			if (earthArmy->getEarthSoldiers().dequeue(u))
+			if (earthArmy->getEarthSoldiers().dequeue(u)&& !earthArmy->getEarthSoldiers().isEmpty())
 			{
 				if (!Pgame->GetSilentMode()) {
 					if (i == capacity - 1) cout << u->getID();
