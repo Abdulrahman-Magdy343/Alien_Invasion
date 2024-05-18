@@ -71,7 +71,9 @@ void EarthArmy::Print()
 
 	cout << EarthGunneries.getCount() << " EG [";
 	EarthGunneries.print();
-	cout << "]\n";
+
+	cout << HealUnits.getCount() << " HU [";
+	HealUnits.print();
 }
 
 void EarthArmy::addToUML(EarthArmyUnit* newUnit)

@@ -12,6 +12,7 @@ bool AlienArmy::AllAreEmpty()
 
 void AlienArmy::addUnit(AlienArmyUnit* newUnit)
 {
+    static bool flag = true;
     UnitType type = newUnit->getType();
     switch (type) {
     case AS:
@@ -22,7 +23,15 @@ void AlienArmy::addUnit(AlienArmyUnit* newUnit)
         monstersCount++;
         break;
     case AD:
-        AlienDrones.insertFront((AlienDrone*)newUnit);
+        if (flag) {
+            AlienDrones.insertFront((AlienDrone*)newUnit);
+            flag = !flag;
+        }
+        else
+        {
+            AlienDrones.insertBack((AlienDrone*)newUnit);
+            flag = !flag;
+        }
         break;
     }
 }
@@ -48,11 +57,9 @@ void AlienArmy::Attack()
         d1->setPower(d1->getPower() - d2->getPower());
     }
     if (monstersCount>0) {
-
         AlienMonster* m;
         m = AlienMonsters[monstersCount-1];
         m->attack();
-    
     }
 }
 

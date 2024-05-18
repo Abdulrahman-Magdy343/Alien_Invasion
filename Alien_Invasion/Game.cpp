@@ -34,19 +34,32 @@ void Game::go()
 	{
 		
 		randGenObj.generate(timeStep);
+		cout << "Current timestep: " << timeStep << endl;
 
+		cout << "========= Units Fighting at the current step =========" << endl;
 		earthArmy.Attack();
 		alienArmy.Attack();
 		earthArmy.infectionSpread();
+		cout << endl;
 
 		//Printing Part
 		if (!SilentMode) {
-			cout << "Current timestep: " << timeStep << endl;
 			earthArmy.Print();
 			alienArmy.Print();
 			cout << "================= Killed list ================" << endl;
 			cout << killedList.getCount() << " units [";
 			killedList.print();
+			cout << "]\n\n";
+
+			cout << "================= UML lists ================" << endl;
+			cout << earthArmy.getSoldiersUML().getCount() << " units [";
+			cout << "]\n\n";
+
+			earthArmy.getSoldiersUML().print();
+			cout << endl;
+			cout << earthArmy.getTanksUML().getCount() << " units [";
+			earthArmy.getTanksUML().print();
+
 			cout << "]\n";
 			cout << "Infection Percentage : " << this->getEarthArmy()->getNumOfInfectedSoldiers() << endl;
 			cout << "Press any char to continoue and E for Exit" << endl;

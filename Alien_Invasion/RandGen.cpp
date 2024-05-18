@@ -259,10 +259,8 @@ void RandGen::generate(int timeStep)
     srand(time(0));
     A = (1 + rand() % 100);
 
-    if (A < prob || timeStep==0 ) {
-        
-        
-
+    if (A < prob || timeStep == 0 ) {
+    
         for (int i = 0; i < armyUnitsNo; i++) //loop to generate units of earth army
         {
             B = (1 + rand() % 100);

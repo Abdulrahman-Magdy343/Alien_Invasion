@@ -70,6 +70,7 @@ public:
                 cout << temp->getItem(pri)->getID() << "\t";
                 temp = temp->getNext();
             }
+            cout << "]\n";
         }
 
     }
