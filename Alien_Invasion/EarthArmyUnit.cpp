@@ -262,29 +262,29 @@ void EarthGunnery::attack() {
 	int AScount = Pgame->getAlienArmy()->getMonstersCount();
 
 	ArrayStack<AlienDrone*> templist2;
+	int randNum = rand() % (AScount + 1);
 
 	for (int i = 0; i < capacity; i++) {
-		AlienMonster* m;
-		if(AScount!=0)
-		int randNum = rand() % (AScount);
-		m = Pgame->getAlienArmy()->getAlienMonsters()[Pgame->getAlienArmy()->getMonstersCount() - 1];
+		AlienMonster* m = nullptr;
+		if (AScount != 0)
+		m = Pgame->getAlienArmy()->getAlienMonsters()[AScount - 1];
 		if (m)
 		{
 			if (!Pgame->GetSilentMode())
 				cout << m->getID() << ", ";
 
-			if (m->isAlive() && !m->gethasbeenattacked()) {
+			if (m->isAlive()) {
 				m->setTa(Pgame->getTimeStep());
-				m->setHasBeenAttacked(true);
 			}
 
 			int hel = m->getHealth();
 			int damage = (this->health * this->power / 100) / pow(hel, 0.5);
 			int newhel = hel - damage;
+
 			if (newhel <= 0)
 			{
 				m->setTd(Pgame->getTimeStep());
-				Pgame->getAlienArmy()->removeMonster(Pgame->getAlienArmy()->getMonstersCount());
+				Pgame->getAlienArmy()->removeMonster(randNum);
 				Pgame->addToKilled(m);
 				m->setHealth(0);
 			}
@@ -302,13 +302,13 @@ void EarthGunnery::attack() {
 			if (!Pgame->GetSilentMode())
 				cout << d->getID() << ", ";
 
-			if (d->isAlive() && !d->gethasbeenattacked()) {
+			if (d->isAlive()) {
 				d->setTa(Pgame->getTimeStep());
-				d->setHasBeenAttacked(true);
 			}
 
 			int hel = d->getHealth();
-			int newhel = hel - this->power;
+			int damage = (this->health * this->power / 100) / pow(hel, 0.5);
+			int newhel = hel - damage;
 
 			if (newhel <= 0)
 			{
@@ -334,7 +334,8 @@ void EarthGunnery::attack() {
 			}
 
 			int hel = d->getHealth();
-			int newhel = hel - this->power;
+			int damage = (this->health * this->power / 100) / pow(hel, 0.5);
+			int newhel = hel - damage;
 
 			if (newhel <= 0)
 			{
@@ -380,6 +381,8 @@ HealUnit::HealUnit(int health, int power, int cap, int timeStamp, Game* pg) :Ear
 
 void HealUnit::attack()
 {
+	if (!Pgame->GetSilentMode())
+		cout << "HU " << this->ID << " heals [";
 	EarthArmy* earthArmy = Pgame->getEarthArmy();
 	ArrayStack<EarthSoldier*> templist;
 	ArrayStack<EarthTank*> templist2;
@@ -393,6 +396,9 @@ void HealUnit::attack()
 			}
 			else
 			{
+				if (!Pgame->GetSilentMode())
+					cout << s->getID() << ", ";
+
 				int hel = s->getHealth();
 				s->setHealth(hel +0.5* (this->power * this->health / 100) / pow(hel, 0.5));
 				if ((double)s->getHealth() / s->getInitialHealth() > 0.2)
@@ -442,5 +448,8 @@ void HealUnit::attack()
 		templist2.pop(m);
 		earthArmy->addToUML(m);
 	}
+	if (!Pgame->GetSilentMode())
+		cout << "]\n";
+
 	Pgame->addToKilled(this); // I am quite sure this would make a problem
 }
