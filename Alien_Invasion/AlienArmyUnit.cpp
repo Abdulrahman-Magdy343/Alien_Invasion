@@ -36,7 +36,7 @@ void AlienSoldier::attack()
 		EarthArmy* earthArmy = Pgame->getEarthArmy();
 		for (int i = 0; i < capacity; i++) {
 			EarthSoldier* u;
-			if (earthArmy->getEarthSoldiers().dequeue(u))
+			if (earthArmy->getEarthSoldiers().dequeue(u)&& !earthArmy->getEarthSoldiers().isEmpty())
 			{
 				if (!Pgame->GetSilentMode()) {
 					if (i == capacity - 1) cout << u->getID();
@@ -107,22 +107,13 @@ void AlienMonster::attack()
 		EarthSoldier* s;
 		if (earthArmy->getEarthSoldiers().dequeue(s))
 		{
+			srand(time(0));
 			//add the infection part
 			int A = (1 + rand() % 100);
-			if (1) {
-
-				if (A) {
-					s->beInfected();
-				}
+			
+			if (A < Pgame->getInfectionProb()) {
+				if (!s->getIsInfected())s->beInfected();
 			}
-			else {
-				if (A < Pgame->getInfectionProb()) {
-					s->beInfected();
-				}
-
-			}
-			/*
-			*/
 			if (!Pgame->GetSilentMode())
 
 				cout << s->getID() << ", ";
@@ -218,8 +209,7 @@ AlienDrone::AlienDrone(int health, int power, int cap, int timeStamp, Game* pg) 
 
 void AlienDrone::attack()
 {
-	if (!Pgame->GetSilentMode())
-		cout << "AD " << this->ID << " shots [";
+	if (!Pgame->GetSilentMode())cout << "AD " << this->ID << " shots [";
 	ArrayStack<EarthGunnery*> templist;
 	ArrayStack<EarthTank*> templist2;
 	EarthArmy* earthArmy = Pgame->getEarthArmy();

@@ -19,8 +19,8 @@ void AlienArmy::addUnit(AlienArmyUnit* newUnit)
         AlienSoldiers.enqueue((AlienSoldier*)newUnit);
         break;
     case AM:
-        AlienMonsters[monstersCount] = (AlienMonster*)newUnit;
-        monstersCount++;
+        AlienMonsters[++monstersCount] = (AlienMonster*)newUnit;
+        //monstersCount++;
         break;
     case AD:
         if (flag) {
@@ -57,8 +57,10 @@ void AlienArmy::Attack()
         d1->setPower(d1->getPower() - d2->getPower());
     }
     if (monstersCount>0) {
+        srand(time(0));
+        int randNum = (rand() % monstersCount);
         AlienMonster* m;
-        m = AlienMonsters[monstersCount-1];
+        m = AlienMonsters[randNum];
         m->attack();
     }
 }
@@ -71,7 +73,7 @@ void AlienArmy::Print()
     AlienSoldiers.print();
     cout << "]\n";
 
-    cout << monstersCount << " AM [";
+    cout << 1+monstersCount << " AM [";
     printMonsters();
     cout << "]\n";
 
@@ -83,7 +85,7 @@ void AlienArmy::Print()
 
 void AlienArmy::printMonsters() const
 {
-    for (int i = 0; i < monstersCount; i++)
+    for (int i = 0; i <= monstersCount; i++)
     {
         cout << AlienMonsters[i]->getID() << " ";
     }
@@ -101,10 +103,9 @@ void AlienArmy::incrementMonsters()
 
 void AlienArmy::removeMonster(int index)
 {
-    //delete AlienMonsters[index];
-    //AlienMonsters[index] = AlienMonsters[monstersCount];
-    //monstersCount--;
-    AlienMonsters[monstersCount--] = nullptr;
+    AlienMonster* s = AlienMonsters[monstersCount];
+    AlienMonsters[index] = s;
+    monstersCount--;
 }
 
 

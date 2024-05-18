@@ -83,6 +83,7 @@ void EarthSoldier::attack() {
 		for (int i = 0; i < capacity; i++) {
 
 			if (Pgame->getEarthArmy()->getEarthSoldiers().dequeue(u)) {
+				if (u == this) { i--; continue; }
 				if (!Pgame->GetSilentMode()) {
 					if (i == capacity - 1) cout << u->getID();
 					else cout << u->getID() << ", ";
@@ -117,8 +118,7 @@ void EarthSoldier::attack() {
 			Pgame->getEarthArmy()->getEarthSoldiers().enqueue(u);
 		}
 	}
-	if (!Pgame->GetSilentMode())
-		cout << "]\n";
+	if (!Pgame->GetSilentMode())cout << "]\n";
 }
 
 string EarthSoldier::getID()
@@ -167,7 +167,7 @@ void EarthTank::attack() {
 
 		AlienMonster* m;
 		m = alienArmy->getAlienMonsters()[MScount];
-		if (m)
+		if (m&&MScount>=0)
 		{
 			if (!Pgame->GetSilentMode())
 				cout << m->getID() << ", ";
@@ -265,13 +265,17 @@ void EarthGunnery::attack() {
 	int randNum = rand() % (AScount + 1);
 
 	for (int i = 0; i < capacity; i++) {
-		AlienMonster* m = nullptr;
-		if (AScount != 0)
-		m = Pgame->getAlienArmy()->getAlienMonsters()[AScount - 1];
-		if (m)
-		{
-			if (!Pgame->GetSilentMode())
-				cout << m->getID() << ", ";
+		AlienMonster* m;
+		srand(time(0));
+		//AScount = (AScount <= -1) ? (-AScount):(AScount);
+		if (AScount>=0) {
+			int randNum = rand() % (AScount+1);
+			//cout << AScount << endl;
+			m = Pgame->getAlienArmy()->getAlienMonsters()[randNum];
+			if (m)
+			{
+				if (!Pgame->GetSilentMode())
+					cout << m->getID() << ", ";
 
 			if (m->isAlive()) {
 				m->setTa(Pgame->getTimeStep());
@@ -400,7 +404,7 @@ void HealUnit::attack()
 					cout << s->getID() << ", ";
 
 				int hel = s->getHealth();
-				s->setHealth(hel +0.5* (this->power * this->health / 100) / pow(hel, 0.5));
+				s->setHealth(hel + 0.5 * (this->power * this->health / 100) / pow(hel, 0.5));
 				if ((double)s->getHealth() / s->getInitialHealth() > 0.2)
 				{
 					earthArmy->getEarthSoldiers().enqueue(s);
