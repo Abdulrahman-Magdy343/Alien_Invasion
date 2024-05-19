@@ -24,9 +24,8 @@ void SUArmyUnit::attack()
 					else cout << u->getID() << ", ";
 				}
 
-				if (u->isAlive() && !u->gethasbeenattacked()) {
+				if (u->isAlive()) {
 					u->setTa(Pgame->getTimeStep());
-					u->setHasBeenAttacked(true);
 				}
 
 				int hel = u->getHealth();

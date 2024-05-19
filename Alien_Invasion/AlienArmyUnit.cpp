@@ -118,9 +118,8 @@ void AlienMonster::attack()
 
 				cout << s->getID() << ", ";
 
-			if (s->isAlive() && !s->gethasbeenattacked()) {
+			if (s->isAlive()) {
 				s->setTa(Pgame->getTimeStep());
-				s->setHasBeenAttacked(true);
 			}
 
 			int hel = s->getHealth();
@@ -151,9 +150,8 @@ void AlienMonster::attack()
 			if (!Pgame->GetSilentMode())
 				cout << t->getID() << ", ";
 
-			if (t->isAlive() && !t->gethasbeenattacked()) {
+			if (t->isAlive()) {
 				t->setTa(Pgame->getTimeStep());
-				t->setHasBeenAttacked(true);
 			}
 
 			int hel = t->getHealth();
@@ -222,9 +220,8 @@ void AlienDrone::attack()
 			if (!Pgame->GetSilentMode())
 				cout << g->getID() << ", ";
 
-			if (g->isAlive() && !g->gethasbeenattacked()) {
+			if (g->isAlive()) {
 				g->setTa(Pgame->getTimeStep());
-				g->setHasBeenAttacked(true);
 			}
 
 			int hel = g->getHealth();
@@ -249,9 +246,8 @@ void AlienDrone::attack()
 			if (!Pgame->GetSilentMode())
 				cout << t->getID() << ", ";
 
-			if (t->isAlive() && !t->gethasbeenattacked()) {
+			if (t->isAlive()) {
 				t->setTa(Pgame->getTimeStep());
-				t->setHasBeenAttacked(true);
 			}
 
 			int hel = t->getHealth();

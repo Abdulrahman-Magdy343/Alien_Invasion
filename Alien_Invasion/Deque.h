@@ -46,7 +46,8 @@ public:
 		}
 		else
 		{
-			back->setNext(newNode);
+			if (back)
+				back->setNext(newNode);
 			newNode->setPrev(back);
 			back = newNode;
 		}
@@ -80,7 +81,10 @@ public:
 				else
 				{
 					back = back->getPrev();
-					back->setNext(nullptr);
+					if (back)
+						back->setNext(nullptr);
+					if (!back)  // Update front if back becomes nullptr
+						front = nullptr;
 				}
 				delete temp;
 				temp = nullptr;
@@ -105,7 +109,10 @@ public:
 				else
 				{
 					front = front->getNext();
-					front->setPrev(nullptr);
+					if (front)
+						front->setPrev(nullptr);
+					if (!front)  
+						back = nullptr;
 				}
 				delete temp;
 				temp = nullptr;
@@ -120,14 +127,15 @@ public:
 
 	bool peekFront(T& holder) const
 	{
-		if (isEmpty())
+		if (isEmpty() || !front)
 			return false;
 		holder = front->getItem();
 		return true;
 	}
+
 	bool peekBack(T& holder) const
 	{
-		if (isEmpty())
+		if (isEmpty() || !back)
 			return false;
 		holder = back->getItem();
 		return true;

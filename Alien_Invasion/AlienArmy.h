@@ -24,6 +24,7 @@ public:
     void incrementMonsters();
     // AlienMonster* pickAlienMonster();
     void removeMonster(int index);
+    bool MonstersIsEmpty();
 
     LinkedQueue<AlienSoldier*>& getAlienSoldiers();
     AlienMonster** getAlienMonsters();

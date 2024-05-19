@@ -48,7 +48,7 @@ void EarthArmy::Attack()
 	}
 	if (!HealUnits.isEmpty()) {
 		HealUnit* h;
-		HealUnits.pop(h);
+		HealUnits.peek(h);
 		h->attack();
 	}
 }
@@ -67,6 +67,7 @@ void EarthArmy::Print()
 
 	cout << EarthGunneries.getCount() << " EG [";
 	EarthGunneries.print();
+
 
 	cout << HealUnits.getCount() << " HU [";
 	HealUnits.print();

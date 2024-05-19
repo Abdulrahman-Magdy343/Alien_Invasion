@@ -47,23 +47,25 @@ void AlienArmy::Attack()
     s->attack();
     }
 
-    if (AlienDrones.includePairOrMore())
+    AlienDrone* d1;
+    AlienDrone* d2;
+    if (AlienDrones.peekFront(d1) && AlienDrones.peekBack(d2))
     {
-        AlienDrone* d1;
-        AlienDrone* d2;
-        AlienDrones.peekFront(d1);
-        AlienDrones.peekBack(d2);
         d1->setPower(d1->getPower() + d2->getPower());
         d1->attack();
         d1->setPower(d1->getPower() - d2->getPower());
     }
-    if (monstersCount > 0) { // Check if there are monsters to attack
+
+    if (!MonstersIsEmpty())
+    {
         srand(time(0));
-        int randNum = 1+ (rand() % monstersCount); // Index will be valid (1 to monstersCount - 1)
+        int randNum = 1 + (rand() % monstersCount); // Index will be valid (1 to monstersCount - 1)
         AlienMonster* m;
         m = AlienMonsters[randNum];
-        m->attack();
-    }
+        if (m) { // Check if there are monsters to attack
+            m->attack();
+        }
+    }    
 }
 
 void AlienArmy::Print()
@@ -106,9 +108,15 @@ void AlienArmy::incrementMonsters()
 
 void AlienArmy::removeMonster(int index)
 {
+    delete AlienMonsters[index];
     AlienMonster* s = AlienMonsters[monstersCount];
     AlienMonsters[index] = s;
     monstersCount--;
+}
+
+bool AlienArmy::MonstersIsEmpty()
+{
+    return (monstersCount <= 0);
 }
 
 

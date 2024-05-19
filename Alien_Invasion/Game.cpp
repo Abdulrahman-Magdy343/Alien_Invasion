@@ -84,10 +84,10 @@ void Game::go()
 
 			cout << "================= UML lists ================" << endl;
 			cout << earthArmy.getSoldiersUML().getCount() << " units [";
-			cout << "]\n\n";
-
 			earthArmy.getSoldiersUML().print();
+			cout << "]\n\n";
 			cout << endl;
+
 			cout << earthArmy.getTanksUML().getCount() << " units [";
 			earthArmy.getTanksUML().print();
 

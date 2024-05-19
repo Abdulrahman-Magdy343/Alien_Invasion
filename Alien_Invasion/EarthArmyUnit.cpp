@@ -163,31 +163,36 @@ void EarthTank::attack() {
 
 	for (int i = 0; i < capacity; i++) {
 
-		AlienMonster* m;
-		m = alienArmy->getAlienMonsters()[MScount];
-		if (m&&MScount>=0)
+		if (!alienArmy->MonstersIsEmpty())
 		{
-			if (!Pgame->GetSilentMode())
-				cout << m->getID() << ", ";
-			alienArmy->removeMonster(MScount);
+			AlienMonster* m;
+			int randNum = rand() % (MScount + 1);
+			m = alienArmy->getAlienMonsters()[randNum];
 
-			if (m->isAlive()) {
-				m->setTa(Pgame->getTimeStep());
-			}
+			if (m)
+			{
+				if (!Pgame->GetSilentMode())
+					cout << m->getID() << ", ";
 
-			int hel = m->getHealth();
-			int damage = (this->health * this->power / 100.0) / pow(hel, 0.5);
-			int newhel = hel - damage;
-			if (newhel <= 0)
-			{
-				
-				Pgame->addToKilled(m);
-			
-			}
-			else
-			{
-				m->setHealth(newhel);
-				templist.push(m);
+				if (m->isAlive()) {
+					m->setTa(Pgame->getTimeStep());
+				}
+
+				int hel = m->getHealth();
+				int damage = (this->health * this->power / 100.0) / pow(hel, 0.5);
+				int newhel = hel - damage;
+				if (newhel <= 0)
+				{
+
+					Pgame->addToKilled(m);
+
+				}
+				else
+				{
+					m->setHealth(newhel);
+					templist.push(m);
+				}
+				alienArmy->removeMonster(randNum);
 			}
 		}
 
@@ -450,5 +455,5 @@ void HealUnit::attack()
 	if (!Pgame->GetSilentMode())
 		cout << "]\n";
 
-	Pgame->addToKilled(this); // I am quite sure this would make a problem
+	//Pgame->addToKilled(this); // I am quite sure this would make a problem
 }

@@ -1,98 +1,33 @@
 Td	ID	Tj	Df	Dd	Db
-0	10	0	0	0	0
-1	6	0	0	1	1
-2	4	0	0	2	2
-5	2000	0	1	4	5
-5	2005	0	0	5	5
-5	2005	0	0	5	5
-5	2005	0	0	5	5
-5	2005	0	0	5	5
-5	2000	0	1	4	5
-5	2000	0	1	4	5
-5	2006	0	0	5	5
-5	2006	0	0	5	5
-5	2006	0	0	5	5
-5	2000	0	1	4	5
-5	2006	0	0	5	5
-5	2005	0	0	5	5
-109	2261	26	0	83	83
-109	2261	26	0	83	83
-109	2261	26	0	83	83
-54	2309	30	0	24	24
-60	2397	39	0	21	21
-51	2367	36	0	15	15
-52	251	25	0	27	27
-54	2309	30	0	24	24
-60	2397	39	0	21	21
-60	2397	39	0	21	21
-73	2339	33	0	40	40
-73	2339	33	0	40	40
-80	2776	77	0	3	3
-81	2779	77	0	4	4
-84	2772	77	4	3	7
-85	2775	77	3	5	8
-95	2606	60	0	35	35
-95	2606	60	0	35	35
-87	2766	76	0	11	11
-110	2706	70	0	40	40
-110	2706	70	0	40	40
-88	2769	76	0	12	12
-90	2299	29	0	61	61
-90	2299	29	0	61	61
-98	2547	54	0	44	44
-98	2547	54	0	44	44
-98	2547	54	0	44	44
-98	2547	54	0	44	44
-98	2547	54	0	44	44
-92	2762	76	12	4	16
-92	2765	76	12	4	16
-98	2547	54	0	44	44
-98	2547	54	0	44	44
-98	2547	54	0	44	44
-98	2547	54	0	44	44
-93	2357	35	0	58	58
-98	2547	54	0	44	44
-98	2547	54	0	44	44
-95	2606	60	0	35	35
-95	2606	60	0	35	35
-95	2756	75	0	20	20
-96	2764	76	18	2	20
-95	2759	75	0	20	20
-96	2764	76	18	2	20
-96	2764	76	18	2	20
-98	2547	54	0	44	44
-99	2724	72	25	2	27
-99	2724	72	25	2	27
-99	2724	72	25	2	27
-99	2752	75	21	3	24
-99	2755	75	20	4	24
-110	2706	70	0	40	40
-102	2746	74	0	28	28
-103	2749	74	0	29	29
-108	2742	74	30	4	34
-108	2745	74	29	5	34
-109	2261	26	0	83	83
-110	2706	70	0	40	40
-111	2736	73	0	38	38
-112	2739	73	0	39	39
+29	2002	0	0	29	29
+29	2008	1	1	27	28
+33	2011	1	1	31	32
+36	2018	2	2	32	34
+41	2007	1	1	39	40
+43	2006	0	0	43	43
+55	2094	42	0	13	13
+80	2015	2	2	76	78
+101	2128	86	0	15	15
+102	2135	87	0	15	15
+116	2001	0	0	116	116
 
 
 Battle Statistics for Earth Army:
-- Total number of each unit (ES, ET, EG): 330, 79, 340
-- Percentage of total destroyed units relative to total units: 0.133511%
+- Total number of each unit (ES, ET, EG): 103, 14, 16
+- Percentage of total destroyed units relative to total units: 0%
 - Percentage of total infected Earth Solders relative to total Solders: 0%
-- Average of Df: 0
-- Average of Dd: 27
-- Average of Db: 27
-- Df/Db %: 0%
-- Dd/Db %: 100%
+- Average of Df: -nan(ind)
+- Average of Dd: -nan(ind)
+- Average of Db: -nan(ind)
+- Df/Db %: -nan(ind)%
+- Dd/Db %: -nan(ind)%
 
 
 Battle Statistics for Alien Army:
-- Total number of each unit (AS, AM, AD): 185, 418, 375
-- Percentage of total destroyed units relative to total units: 7.36196%
-- Average of Df: 3.66667
-- Average of Dd: 25.7639
-- Average of Db: 29.4306
-- Df/Db %: 12.4587%
-- Dd/Db %: 87.5413%
+- Total number of each unit (AS, AM, AD): 107, 0, 7
+- Percentage of total destroyed units relative to total units: 9.64912%
+- Average of Df: 0.636364
+- Average of Dd: 39.6364
+- Average of Db: 40.2727
+- Df/Db %: 1.58014%
+- Dd/Db %: 98.4199%
