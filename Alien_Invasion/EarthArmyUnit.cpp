@@ -51,9 +51,8 @@ void EarthSoldier::attack() {
 					else cout << u->getID() << ", ";
 				}
 
-				if (u->isAlive() && !u->gethasbeenattacked()) {
+				if (u->isAlive()) {
 					u->setTa(Pgame->getTimeStep());
-					u->setHasBeenAttacked(true);
 				}
 
 				int hel = u->getHealth();
@@ -89,9 +88,8 @@ void EarthSoldier::attack() {
 					else cout << u->getID() << ", ";
 				}
 
-				if (u->isAlive() && !u->gethasbeenattacked()) {
+				if (u->isAlive()) {
 					u->setTa(Pgame->getTimeStep());
-					u->setHasBeenAttacked(true);
 				}
 
 				int hel = u->getHealth();
@@ -173,9 +171,8 @@ void EarthTank::attack() {
 				cout << m->getID() << ", ";
 			alienArmy->removeMonster(MScount);
 
-			if (m->isAlive() && !m->gethasbeenattacked()) {
+			if (m->isAlive()) {
 				m->setTa(Pgame->getTimeStep());
-				m->setHasBeenAttacked(true);
 			}
 
 			int hel = m->getHealth();
@@ -205,9 +202,8 @@ void EarthTank::attack() {
 				if (!Pgame->GetSilentMode())
 					cout << u->getID() << ", ";
 
-				if (u->isAlive() && !u->gethasbeenattacked()) {
+				if (u->isAlive()) {
 					u->setTa(Pgame->getTimeStep());
-					u->setHasBeenAttacked(true);
 				}
 
 				int hel = u->getHealth();
@@ -242,7 +238,7 @@ void EarthTank::attack() {
 	{
 		AlienSoldier* u;
 		templist2.pop(u);
-		Pgame->getAlienArmy()->getAlienSoldiers().enqueue(u);
+		Pgame->getAlienArmy()->addUnit(u);
 	}
 }
 
@@ -332,9 +328,8 @@ void EarthGunnery::attack() {
 				if (!Pgame->GetSilentMode())
 					cout << d->getID() << ", ";
 
-				if (d->isAlive() && !d->gethasbeenattacked()) {
+				if (d->isAlive()) {
 					d->setTa(Pgame->getTimeStep());
-					d->setHasBeenAttacked(true);
 				}
 
 				int hel = d->getHealth();

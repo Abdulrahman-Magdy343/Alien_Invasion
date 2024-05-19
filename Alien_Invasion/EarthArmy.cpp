@@ -31,28 +31,24 @@ void EarthArmy::Attack()
 	if (!EarthSoldiers.isEmpty()) {
 		EarthSoldier* s;
 		EarthSoldiers.peek(s);
-		if (s != NULL)
 		s->attack();
 	}
 	if (!Tanks.isEmpty())
 	{
 		EarthTank* t;
 		Tanks.peek(t);
-		if (t != NULL)
 		t->attack();
 	}
 	if (!EarthGunneries.isEmpty()) {
 		EarthGunnery* g;
 		int pri = 0;
 		EarthGunneries.dequeue(g, pri);
-		if(g!=NULL)
 		g->attack();
 		EarthGunneries.enqueue(g, pri);
 	}
 	if (!HealUnits.isEmpty()) {
 		HealUnit* h;
 		HealUnits.pop(h);
-		if (h != NULL)
 		h->attack();
 	}
 }

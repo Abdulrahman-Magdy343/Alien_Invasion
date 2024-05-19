@@ -30,55 +30,55 @@ void AlienSoldier::attack()
 {
 	if (!Pgame->GetSilentMode())
 		cout << "AS " << this->getID() << " shots [";
-	for (int i = 0; i < capacity; i++)
-	{
-		ArrayStack<EarthSoldier*> templist;
-		EarthArmy* earthArmy = Pgame->getEarthArmy();
-		for (int i = 0; i < capacity; i++) {
-			EarthSoldier* u;
-			if (earthArmy->getEarthSoldiers().dequeue(u)&& !earthArmy->getEarthSoldiers().isEmpty())
+
+	ArrayStack<EarthSoldier*> templist;
+	EarthArmy* earthArmy = Pgame->getEarthArmy();
+	for (int i = 0; i < capacity; i++) {
+		EarthSoldier* u;
+		if (earthArmy->getEarthSoldiers().dequeue(u))
+		{
+			if (!Pgame->GetSilentMode()) {
+				if (i == capacity - 1) cout << u->getID();
+				else cout << u->getID() << ", ";
+			}
+
+
+			if (u->isAlive()) {
+				u->setTa(Pgame->getTimeStep());
+			}
+
+			int hel = u->getHealth();
+			int damage = (this->health * this->power / 100) / (double)pow(hel, 0.5);
+			int newhel = hel - damage;
+
+			if (newhel <= 0)
 			{
-				if (!Pgame->GetSilentMode()) {
-					if (i == capacity - 1) cout << u->getID();
-					else cout << u->getID() << ", ";
-				}
-
-
-				if (u->isAlive() && !u->gethasbeenattacked()) {
-					u->setTa(Pgame->getTimeStep());
-					u->setHasBeenAttacked(true);
-				}
-
-				int hel = u->getHealth();
-				int damage = (this->health * this->power / 100) / (double)pow(hel, 0.5);
-				int newhel = hel - damage;
-				if (newhel <= 0)
+				u->setTd(Pgame->getTimeStep());
+				Pgame->addToKilled(u);
+				u->setHealth(0);
+			}
+			else
+			{
+				u->setHealth(newhel);
+				int initHel = u->getInitialHealth();
+				if ((double)newhel / initHel < 0.2)
 				{
-					u->setTd(Pgame->getTimeStep());
-					Pgame->addToKilled(u);
-					u->setHealth(0);
+					u->setUMLjoinTime(Pgame->getTimeStep());
+					earthArmy->addToUML(u);
 				}
-				else
-				{
-					u->setHealth(newhel);
-					int initHel = u->getInitialHealth();
-					if ((double)newhel / initHel < 0.2)
-					{
-						u->setUMLjoinTime(Pgame->getTimeStep());
-						earthArmy->addToUML(u);
-					}
-					else templist.push(u);
-				}
+				else templist.push(u);
 			}
 		}
-		if (!Pgame->GetSilentMode())
-			cout << "]\n";
-		while (!templist.isEmpty())
-		{
-			EarthSoldier* u;
-			templist.pop(u);
-			Pgame->getEarthArmy()->getEarthSoldiers().enqueue(u);
-		}
+
+
+	}
+	if (!Pgame->GetSilentMode())
+		cout << "]\n";
+	while (!templist.isEmpty())
+	{
+		EarthSoldier* u;
+		templist.pop(u);
+		Pgame->getEarthArmy()->getEarthSoldiers().enqueue(u);
 	}
 }
 
