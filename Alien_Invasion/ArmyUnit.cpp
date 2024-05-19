@@ -69,6 +69,7 @@ void ArmyUnit::setDb(int db) {
 
 // Getters
 
+
 string ArmyUnit::getID() const  {
    
         return to_string(ID);

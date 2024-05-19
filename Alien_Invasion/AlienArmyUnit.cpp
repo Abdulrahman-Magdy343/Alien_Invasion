@@ -128,9 +128,9 @@ void AlienMonster::attack()
 			int newhel = hel - damage;
 			if (newhel <= 0)
 			{
-				s->setTd(Pgame->getTimeStep());
+				
 				Pgame->addToKilled(s);
-				s->setHealth(0);
+			
 			}
 			else
 			{
@@ -161,9 +161,9 @@ void AlienMonster::attack()
 			int newhel = hel - damage;
 			if (newhel <= 0)
 			{
-				t->setTd(Pgame->getTimeStep());
+			
 				Pgame->addToKilled(t);
-				t->setHealth(0);
+			
 			}
 			else
 			{
@@ -232,9 +232,9 @@ void AlienDrone::attack()
 			int newhel = hel - damage;
 			if (newhel <= 0)
 			{
-				g->setTd(Pgame->getTimeStep());
+				
 				Pgame->addToKilled(g);
-				g->setHealth(0);
+			
 			}
 			else
 			{
@@ -259,9 +259,8 @@ void AlienDrone::attack()
 			int newhel = hel - damage;
 			if (newhel <= 0)
 			{
-				t->setTd(Pgame->getTimeStep());
 				Pgame->addToKilled(t);
-				t->setHealth(0);
+			
 			}
 			else
 			{

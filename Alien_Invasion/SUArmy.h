@@ -9,7 +9,7 @@ class SUArmy
 
 
 public:
-    //bool AllAreEmpty();
+    bool AllAreEmpty();
     void destructSUArmy();
     void addUnit(SUArmyUnit* newUnit);
     void Attack();

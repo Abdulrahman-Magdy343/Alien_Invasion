@@ -59,6 +59,7 @@ public:
 		{
 			DLnode<T>* temp = front;
 			while (temp) {
+				if(temp!=nullptr)
 				cout << temp->getItem()->getID() << "\t";
 				temp = temp->getNext();
 			}
@@ -69,45 +70,52 @@ public:
 
 	bool removeBack(T &holder)
 	{
-		if (!isEmpty()) 
+		if (!isEmpty())
 		{
 			DLnode<T>* temp = back;
-			holder = temp->getItem();
-			if (back == front)
-				front = back = nullptr;
-			else
-			{
-				back = back->getPrev();
-				back->setNext(nullptr);
+			if (temp) {
+				holder = temp->getItem();
+				if (back == front)
+					front = back = nullptr;
+				else
+				{
+					back = back->getPrev();
+					back->setNext(nullptr);
+				}
+				delete temp;
+				temp = nullptr;
+				count--;
+				return true;
+
 			}
-			delete temp;
-			temp = nullptr;
-			count--;
-			return true;
+			else
+				return false;
 		}
-		else
-			return false;
+		return false;
 	}
 	bool removeFront(T& holder)
 	{
 		if (!isEmpty())
 		{
 			DLnode<T>* temp = front;
-			holder = temp->getItem();
-			if (back == front)
-				front = back = nullptr;
-			else
-			{
-				front = front->getNext();
-				front->setPrev(nullptr);
+			if (temp) {
+				holder = temp->getItem();
+				if (back == front)
+					front = back = nullptr;
+				else
+				{
+					front = front->getNext();
+					front->setPrev(nullptr);
+				}
+				delete temp;
+				temp = nullptr;
+				count--;
+				return true;
 			}
-			delete temp;
-			temp = nullptr;
-			count--;
-			return true;
+			else
+				return false;
 		}
-		else
-			return false;
+		return false;
 	}
 
 	bool peekFront(T& holder) const
